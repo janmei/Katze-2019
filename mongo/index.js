@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost:27017/katze', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://panel:rG5G6TzXR&77kM25j@Taso@cluster0-co2xp.mongodb.net/katze?retryWrites=true', { useNewUrlParser: true });
 // Setup server port
 var port = process.env.PORT || 8080;
 
