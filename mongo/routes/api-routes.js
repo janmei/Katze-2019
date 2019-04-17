@@ -10,7 +10,7 @@ router.get('/', function (req, res) {
 });
 
 // Import contact controller
-var contactController = require('./contactController');
+var contactController = require('./contact/contactController');
 
 // Contact routes
 router.route('/contacts')

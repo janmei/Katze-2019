@@ -8,7 +8,7 @@ let mongoose = require('mongoose');
 let app = express();
 
 // Import routes
-let apiRoutes = require("./api-routes")
+let apiRoutes = require("./routes/api-routes")
 
 
 // Configure bodyparser to handle post requests
@@ -18,9 +18,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/resthub');
-
-var db = mongoose.connection;
+mongoose.connect('mongodb://localhost:27017/katze', { useNewUrlParser: true });
 // Setup server port
 var port = process.env.PORT || 8080;
 
@@ -33,5 +31,5 @@ app.use('/api', apiRoutes)
 
 // Launch app to listen to specified port
 app.listen(port, function () {
-    console.log("Running RestHub on port " + port);
+    console.log("Running Katze on port " + port);
 });

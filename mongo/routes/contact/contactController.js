@@ -15,6 +15,9 @@ exports.index = function (req, res) {
             message: "Contacts retrieved successfully",
             data: contacts
         });
+
+        console.log(contacts);
+        
     });
 };
 
@@ -28,8 +31,8 @@ exports.new = function (req, res) {
 
     // save the contact and check for errors
     contact.save(function (err) {
-        // if (err)
-        //     res.json(err);
+        if (err)
+            res.json(err);
 
         res.json({
             message: 'New contact created!',
