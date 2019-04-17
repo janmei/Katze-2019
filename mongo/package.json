@@ -1,22 +1,21 @@
 {
-  "name": "katze-2019",
+  "name": "resthub",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app demonstrating simple Restful API implementation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/janmei/Katze-2019.git"
-  },
-  "author": "",
+  "keywords": [
+    "api",
+    "restful",
+    "json"
+  ],
+  "author": "David Inyang-Etoh",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/janmei/Katze-2019/issues"
-  },
-  "homepage": "https://github.com/janmei/Katze-2019#readme",
   "dependencies": {
-    "mongodb": "^2.2.36"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.2"
   }
 }
