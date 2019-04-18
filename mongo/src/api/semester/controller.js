@@ -14,9 +14,10 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .catch(next)
 
 export const show = ({ params }, res, next) =>
-  Semester.findById(params.id)
+  Semester.findOne({ year: params.year })
+    .populate('teams')
     .then(notFound(res))
-    .then((semester) => semester ? semester.view() : null)
+    .then((semester) => semester ? semester.view(true) : null)
     .then(success(res))
     .catch(next)
 

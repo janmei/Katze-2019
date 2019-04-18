@@ -15,6 +15,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
 
 export const show = ({ params }, res, next) =>
   Day.findById(params.id)
+    .populate('program')
     .then(notFound(res))
     .then((day) => day ? day.view() : null)
     .then(success(res))

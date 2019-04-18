@@ -37,14 +37,14 @@ router.get('/',
   index)
 
 /**
- * @api {get} /semesters/:id Retrieve semester
+ * @api {get} /semesters/:year Retrieve semester
  * @apiName RetrieveSemester
  * @apiGroup Semester
  * @apiSuccess {Object} semester Semester's data.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Semester not found.
  */
-router.get('/:id',
+router.get('/:year',
   show)
 
 /**
