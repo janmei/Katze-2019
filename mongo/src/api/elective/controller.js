@@ -25,11 +25,9 @@ export const show = ({ params }, res, next) =>
     .then(success(res))
     .catch(next)
 
-export const update = ({ bodymen: { body }, params }, res, next) =>
-  Elective.findById(params.id)
+export const update = (req, res, next) =>
+  Team.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
     .then(notFound(res))
-    .then((elective) => elective ? Object.assign(elective, body).save() : null)
-    .then((elective) => elective ? elective.view(true) : null)
     .then(success(res))
     .catch(next)
 

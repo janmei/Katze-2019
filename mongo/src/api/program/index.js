@@ -56,8 +56,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Program not found.
  */
-router.put('/:id',
-  body({ title, time }),
+router.post('/:id',
   update)
 
 /**

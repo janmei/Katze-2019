@@ -25,11 +25,9 @@ export const show = ({ params }, res, next) =>
     .then(success(res))
     .catch(next)
 
-export const update = ({ bodymen: { body }, params }, res, next) =>
-  Team.findById(params.id)
+export const update = (req, res, next) =>
+  Team.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
     .then(notFound(res))
-    .then((team) => team ? Object.assign(team, body).save() : null)
-    .then((team) => team ? team.view(true) : null)
     .then(success(res))
     .catch(next)
 

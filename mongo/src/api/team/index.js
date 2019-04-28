@@ -6,7 +6,7 @@ import { schema } from './model'
 export Team, { schema } from './model'
 
 const router = new Router()
-const { persons, abstract, name, image } = schema.tree
+const { persons, abstract, name, image, semester } = schema.tree
 
 /**
  * @api {post} /teams Create team
@@ -21,7 +21,7 @@ const { persons, abstract, name, image } = schema.tree
  * @apiError 404 Team not found.
  */
 router.post('/',
-  body({ persons, abstract, name, image }),
+  body({ persons, abstract, name, image, semester }),
   create)
 
 /**
@@ -60,8 +60,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Team not found.
  */
-router.put('/:id',
-  body({ persons, abstract, name, image }),
+router.post('/:id',
   update)
 
 /**

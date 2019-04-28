@@ -59,8 +59,7 @@ router.get('/:year',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Semester not found.
  */
-router.put('/:id',
-  body({ year, title, teams, description }),
+router.post('/:id',
   update)
 
 /**

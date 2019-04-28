@@ -13,23 +13,28 @@ const teamSchema = new Schema({
   },
   image: {
     type: String
+  },
+  semester: {
+    type: Number,
+    required: true
   }
 }, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => { delete ret._id }
+    }
+  })
 
 teamSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
-      persons: this.persons,
-      abstract: this.abstract,
       name: this.name,
+      semester: this.semester,
+      abstract: this.abstract,
+      persons: this.persons,
       image: this.image,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt

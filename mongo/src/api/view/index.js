@@ -58,8 +58,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 View not found.
  */
-router.put('/:id',
-  body({ content, animation, name }),
+router.post('/:id',
   update)
 
 /**

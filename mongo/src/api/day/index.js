@@ -55,8 +55,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Day not found.
  */
-router.put('/:id',
-  body({ program, date }),
+router.post('/:id',
   update)
 
 /**

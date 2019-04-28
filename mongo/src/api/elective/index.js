@@ -58,8 +58,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Elective not found.
  */
-router.put('/:id',
-  body({ name, prof, description }),
+router.post('/:id',
   update)
 
 /**
