@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
+import './TeamDetail.css'
 import axios from 'axios';
 import qs from 'qs';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Clear from '@material-ui/icons/Clear';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+
+
 class TeamDetail extends Component {
   constructor({ match }) {
     super();
@@ -73,10 +83,20 @@ class TeamDetail extends Component {
     if (this.state.persons != null) {
       return this.state.persons.map((item, i) => {
         return (
-          <div key={i} className="element">
-            <input type="text" onChange={this.handleEmailListChange.bind(this, i)} value={item} />
-            <button onClick={this.removePeople.bind(this, i)}>x</button>
-          </div>
+          <TextField id="filled-name" label="Name" name="person" key={i} value={item} onChange={this.handleEmailListChange.bind(this, i)} margin="normal" variant="outlined" 
+            InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Löschen"
+                  onClick={this.removePeople.bind(this, i)}
+                >
+                  <Clear />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          />
         )
       })
     } else {
@@ -94,22 +114,26 @@ class TeamDetail extends Component {
   removePeople = (index) => {
     // index.preventDefault()
     this.setState({
-      persons: this.state.persons.filter((x, i) => i != index)
+      persons: this.state.persons.filter((x, i) => i !== index)
     });
   }
 
   render() {
     return (
       <div className="doc">
-        <h3>Semester {this.state.semester}</h3>
+        <h3>{this.state.semester}. Semester – {this.state.name}</h3>
         <form onSubmit={this.handleSubmit}>
-          <input name="name" value={this.state.name} onChange={this.handleInputChange} />
-          <input name="abstract" value={this.state.abstract} onChange={this.handleInputChange} />
-          <p>Mitglieder</p>
-          {this.renderNames()}
-          <button onClick={this.addMember}>Gruppenmitglied hinzufügen</button>
+          <Grid container direction="column" justify="flex-start" alignItems="flex-start">
+            <TextField id="filled-name"  label="Name" name="name" value={this.state.name} onChange={this.handleInputChange} margin="normal" variant="outlined" fullWidth/>
+            <TextField id="filled-name" multiline label="Beschreibung" name="abstract" value={this.state.abstract} onChange={this.handleInputChange} margin="normal" variant="outlined" fullWidth/>
+            <p>Mitglieder</p>
+          <FormControl fullWidth>
+            {this.renderNames()}
+          </FormControl>
+            <Button variant="outlined" onClick={this.addMember}>Mitglied hinzufügen</Button>
 
-          <button type="submit">Senden</button>
+            <button id="outlined-button-file" type="submit">Senden</button>
+            </Grid>
         </form>
       </div>
     );
