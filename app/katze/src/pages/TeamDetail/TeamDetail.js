@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import './TeamDetail.css'
 import axios from 'axios';
 import qs from 'qs';
@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 
-
 class TeamDetail extends Component {
   constructor({ match }) {
     super();
@@ -21,7 +20,8 @@ class TeamDetail extends Component {
       name: "",
       abstract: "",
       persons: [],
-      semester: null
+      semester: null,
+      hidden: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -71,6 +71,12 @@ class TeamDetail extends Component {
     this.setState({
       [name]: value
     });
+
+    if (this.state.persons[0] === "") {
+      this.setState({
+        hidden: false
+      })
+    }
   }
 
   handleEmailListChange(index, event) {
@@ -86,13 +92,15 @@ class TeamDetail extends Component {
           <TextField id="filled-name" label="Name" name="person" key={i} value={item} onChange={this.handleEmailListChange.bind(this, i)} margin="normal" variant="outlined" 
             InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
+                <InputAdornment position="end">
+                  { !this.state.hidden && 
                 <IconButton
                   aria-label="Löschen"
-                  onClick={this.removePeople.bind(this, i)}
+                    onClick={this.removePeople.bind(this, i)}
                 >
                   <Clear />
                 </IconButton>
+                    }
               </InputAdornment>
             ),
           }}
@@ -109,6 +117,23 @@ class TeamDetail extends Component {
     this.setState((prevState) => ({
       persons: [...prevState.persons, ""],
     }));
+
+    if (this.state.persons.length > 0) {
+      this.setState({
+        hidden: false
+      })
+    }
+  }
+
+  toggleHidden() {
+    const hidden = this.state.hidden
+    if (this.state.persons.length < 2) {
+      this.setState({
+        hidden: !hidden
+      })
+    }
+    console.log(hidden, this.state.persons);
+    
   }
 
   removePeople = (index) => {
@@ -116,6 +141,15 @@ class TeamDetail extends Component {
     this.setState({
       persons: this.state.persons.filter((x, i) => i !== index)
     });
+    if (this.state.persons.length === 1) {
+      this.setState({
+        persons: ['']
+      })
+
+      this.setState({
+        hidden: true
+      })
+    }
   }
 
   render() {
@@ -130,9 +164,10 @@ class TeamDetail extends Component {
           <FormControl fullWidth>
             {this.renderNames()}
           </FormControl>
-            <Button variant="outlined" onClick={this.addMember}>Mitglied hinzufügen</Button>
-
-            <button id="outlined-button-file" type="submit">Senden</button>
+            <div className="margin-bot">
+              <Button variant="outlined" onClick={this.addMember}>Mitglied hinzufügen</Button>
+            </div>
+            <Button id="outlined-button-file" color="primary" variant="contained" type="submit">Senden</Button>
             </Grid>
         </form>
       </div>

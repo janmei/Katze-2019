@@ -9,6 +9,7 @@ export const create = ({ bodymen: { body } }, res, next) =>
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   Semester.find(query, select, cursor)
+    .populate('teams')
     .then((semesters) => semesters.map((semester) => semester.view()))
     .then(success(res))
     .catch(next)
