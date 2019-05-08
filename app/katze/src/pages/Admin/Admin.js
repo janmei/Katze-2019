@@ -14,7 +14,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import axios from 'axios';
+import qs from 'qs';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
@@ -25,8 +26,23 @@ class Admin extends Component {
     // SET THE SLIDE ID TO GLOBAL STATE
     this.state = {
       menu: false,
-      testSelect: '',
+      template: '',
+      semesters: [],
+      selectedSemester: {},
+      teams: [],
+      selectedTeam: {}
     };
+  }
+
+
+  componentDidMount() {
+    axios.get('http://localhost:9000/semesters/').then(res => {
+      this.setState({
+        semesters: res.data
+      })
+    }).catch(function (err) {
+      console.log(err);
+    })
   }
 
   toggleDrawer = open => () => {
@@ -38,6 +54,38 @@ class Admin extends Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
+
+  handleSelectChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+      teams: event.target.value.teams
+    });
+    
+  };
+
+  renderNames() {
+    if (this.state.semesters != null) {
+      return this.state.semesters.map((item, i) => {
+        return (
+          <MenuItem value={item}>{item.year}</MenuItem>
+          )
+      })
+    } else {
+      return;
+    }
+  }
+
+  renderTeams() {
+    if (this.state.teams != null) {
+      return this.state.teams.map((item, i) => {
+        return (
+          <MenuItem value={item.name}>{item.name}</MenuItem>
+        )
+      })
+    } else {
+      return;
+    }
+  }
 
   render() {
     return (
@@ -65,16 +113,17 @@ class Admin extends Component {
           onOpen={this.toggleDrawer(true)}
         >
           <div className="menuWidth">
+            
             <Typography component="h2" variant="h5" gutterBottom>
               Template
             </Typography>
             <FormControl className="menuForm" variant="outlined">
               <InputLabel htmlFor="outlined-age-simple">Template</InputLabel>
               <Select
-                value={this.state.testSelect}
-                onChange={this.handleChange('testSelect')}
+                value={this.state.template}
+                onChange={this.handleChange('template')}
                 input={
-                  <OutlinedInput name="testSelect" id="outlined-age-simple" />
+                  <OutlinedInput name="template" id="outlined-age-simple" />
                 }
               >
                 <MenuItem value="">
@@ -92,35 +141,31 @@ class Admin extends Component {
             <FormControl className="menuForm" variant="outlined">
               <InputLabel htmlFor="outlined-age-simple">Semester</InputLabel>
               <Select
-                value={this.state.testSelect}
-                onChange={this.handleChange('testSelect')}
+                value={this.state.selectedSemester}
+                onChange={this.handleSelectChange('selectedSemester')}
                 input={
-                  <OutlinedInput name="testSelect" id="outlined-age-simple" />
+                  <OutlinedInput name="semesters" id="outlined-age-simple" />
                 }
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>Mocked Template A</MenuItem>
-                <MenuItem value={2}>Mocked Template B</MenuItem>
-                <MenuItem value={3}>Mocked Template C</MenuItem>
+                {this.renderNames()}
               </Select>
             </FormControl>
             <FormControl className="menuForm" variant="outlined">
               <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
               <Select
-                value={this.state.testSelect}
-                onChange={this.handleChange('testSelect')}
+                value={this.state.selectedTeam}
+                onChange={this.handleChange('selectedTeam')}
                 input={
-                  <OutlinedInput name="testSelect" id="outlined-age-simple" />
+                  <OutlinedInput name="teams" id="outlined-age-simple" />
                 }
               >
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>Mocked Template A</MenuItem>
-                <MenuItem value={2}>Mocked Template B</MenuItem>
-                <MenuItem value={3}>Mocked Template C</MenuItem>
+                {this.renderTeams()}
               </Select>
             </FormControl>
             <Divider />
