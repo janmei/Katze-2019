@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Admin.css';
 
+import Icon from '@material-ui/core/Icon';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +34,9 @@ class Admin extends Component {
     return (
       <div className="Admin">
         Admin View <br />
-        <Button onClick={this.toggleDrawer(true)}>Open Menu</Button>
+        <Button onClick={this.toggleDrawer(true)}>
+          <Icon>menz</Icon>
+        </Button>
         {/* TODO: Create an Styled Component out of this with an different width */}
         {/*  https://material-ui.com/customization/overrides/ */}
         <SwipeableDrawer
@@ -43,6 +46,7 @@ class Admin extends Component {
           onClose={this.toggleDrawer(false)}
           onOpen={this.toggleDrawer(true)}
         >
+          <div className="menuWidth" />
           <Typography component="h2" variant="h5" gutterBottom>
             Template
           </Typography>
