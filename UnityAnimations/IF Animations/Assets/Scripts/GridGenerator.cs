@@ -5,10 +5,9 @@ using UnityEngine;
 public class GridGenerator : MonoBehaviour
 {
     public GameObject SingleCubeTemplate;
-    public float ROWS;
     public float COLS;
+    public float ROWS;
 
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -27,6 +26,7 @@ public class GridGenerator : MonoBehaviour
                 float z = Mathf.Floor(row / 2) + col;
 
                 cube.transform.position = new Vector3(x, y, z);
+
             }
         }
 
