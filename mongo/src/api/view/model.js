@@ -8,6 +8,9 @@ const viewSchema = new Schema({
     sub: {
       type: String,
     },
+    countdown: {
+      type: Date,
+    }
   },
   animation: {
     type: String

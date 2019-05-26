@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Box from '@material-ui/core/Box';
 
 import Divider from '@material-ui/core/Divider';
 
@@ -20,6 +21,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Views from '../../components/Views/Views';
+import Countdown from '../../components/Countdown/Countdown';
+import { Button } from '@material-ui/core';
 
 class Admin extends Component {
   constructor() {
@@ -33,7 +36,7 @@ class Admin extends Component {
       selectedSemester: {},
       teams: [],
       selectedTeam: {},
-      views: []
+      views: [],
     };
   }
 
@@ -74,7 +77,7 @@ class Admin extends Component {
       [name]: event.target.value,
       teams: event.target.value.teams
     });
-    
+
   };
 
   renderNames() {
@@ -82,7 +85,7 @@ class Admin extends Component {
       return this.state.semesters.map((item, i) => {
         return (
           <MenuItem value={item}>{item.year}</MenuItem>
-          )
+        )
       })
     } else {
       return;
@@ -128,7 +131,7 @@ class Admin extends Component {
           onOpen={this.toggleDrawer(true)}
         >
           <div className="menuWidth">
-            
+
             <Typography component="h2" variant="h5" gutterBottom>
               Template
             </Typography>
@@ -144,49 +147,56 @@ class Admin extends Component {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>Teams</MenuItem>
-                <MenuItem value={2}>Zeitplan</MenuItem>
-                <MenuItem value={3}>Countdown</MenuItem>
+                <MenuItem value={"teams"}>Teams</MenuItem>
+                <MenuItem value={"schedule"}>Zeitplan</MenuItem>
+                <MenuItem value={"countdown"}>Countdown</MenuItem>
               </Select>
             </FormControl>
-            <Divider />
-            <Typography component="h2" variant="h5" gutterBottom>
-              Animation
+            {this.state.template == "teams" &&
+              <div>
+                <Divider />
+                <Typography component="h2" variant="h5" gutterBottom>
+                  Info Layer
             </Typography>
-            <FormControl className="menuForm" variant="outlined">
-              <InputLabel htmlFor="outlined-age-simple">Semester</InputLabel>
-              <Select
-                value={this.state.selectedSemester}
-                onChange={this.handleSelectChange('selectedSemester')}
-                input={
-                  <OutlinedInput name="semesters" id="outlined-age-simple" />
-                }
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.renderNames()}
-              </Select>
-            </FormControl>
-            <FormControl className="menuForm" variant="outlined">
-              <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
-              <Select
-                value={this.state.selectedTeam}
-                onChange={this.handleChange('selectedTeam')}
-                input={
-                  <OutlinedInput name="teams" id="outlined-age-simple" />
-                }
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                {this.renderTeams()}
-              </Select>
-            </FormControl>
+                <FormControl className="menuForm" variant="outlined">
+                  <InputLabel htmlFor="outlined-age-simple">Semester</InputLabel>
+                  <Select
+                    value={this.state.selectedSemester}
+                    onChange={this.handleSelectChange('selectedSemester')}
+                    input={
+                      <OutlinedInput name="semesters" id="outlined-age-simple" />
+                    }
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {this.renderNames()}
+                  </Select>
+                </FormControl>
+                <FormControl className="menuForm" variant="outlined">
+                  <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
+                  <Select
+                    value={this.state.selectedTeam}
+                    onChange={this.handleChange('selectedTeam')}
+                    input={
+                      <OutlinedInput name="teams" id="outlined-age-simple" />
+                    }
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {this.renderTeams()}
+                  </Select>
+                </FormControl>
+              </div>
+            }
             <Divider />
             <Typography component="h2" variant="h5" gutterBottom>
               Countdown
             </Typography>
+            <Countdown></Countdown>
+
+            <Button color="primary" variant="contained">Senden</Button>
           </div>
         </Drawer>
       </div>
