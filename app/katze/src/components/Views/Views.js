@@ -16,7 +16,7 @@ class Views extends Component {
         if (this.props.views != null) {
             return this.props.views.map((item, i) => {
                 return (
-                    <View title={item.content.head} sub={item.content.sub} key={item.id}></View>
+                    <View title={item.content.head} sub={item.content.sub} name={item.name} key={item.id}></View>
                 )
             })
         } else {

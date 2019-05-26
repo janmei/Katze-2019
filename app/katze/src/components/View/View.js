@@ -27,6 +27,9 @@ class View extends Component {
         return (
             <Card className="card" m={2} width={1 / 4}>
                 <CardContent>
+                    <Typography color="textSecondary">
+                        {this.props.name}
+                    </Typography>
                     <Typography variant="h6" component="p">
                         {this.props.title}
                     </Typography>
