@@ -11,20 +11,18 @@ import Typography from '@material-ui/core/Typography';
 
 
 class View extends Component {
-    constructor({ match }) {
+    constructor() {
         super();
-
-        // SET THE Views ID TO GLOBAL STATE
-        this.state = {
-
-        };
     }
 
     render() {
         return (
             <Card className="card">
                 <CardContent>
-                        {this.props.content}
+                    <Typography color="textSecondary">
+                        {this.props.title}
+                        {this.props.sub}
+                    </Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small">Learn More</Button>

@@ -7,28 +7,16 @@ class Views extends Component {
     constructor() {
         super();
 
-        // SET THE Views ID TO GLOBAL STATE
-        this.state = {
-        };
     }
 
-    componentDidMount() {
-        axios.get('http://localhost:9000/views/').then(res => {
-            console.log(res.data);
-            
-            this.setState({
-                views: res.data
-            })
-        }).catch(function (err) {
-            console.log(err);
-        })
-    }
+
 
     renderNames() {
-        if (this.state.views != null) {
-            return this.state.views.map((item, i) => {
+
+        if (this.props.views != null) {
+            return this.props.views.map((item, i) => {
                 return (
-                    <View content={item.content} ></View>
+                    <View title={item.content.head} sub={item.content.sub} key={item.id}></View>
                 )
             })
         } else {

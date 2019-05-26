@@ -46,6 +46,17 @@ class Admin extends Component {
     }).catch(function (err) {
       console.log(err);
     })
+
+    axios.get('http://localhost:9000/views/').then(res => {
+      this.setState({
+        views: res.data
+      })
+      console.log(this.state.views);
+
+
+    }).catch(function (err) {
+      console.log(err);
+    })
   }
 
   toggleDrawer = open => () => {
@@ -107,7 +118,7 @@ class Admin extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Views></Views>
+        <Views views={this.state.views}></Views>
         <SwipeableDrawer
           id="sideMenu"
           anchor="right"

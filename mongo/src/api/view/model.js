@@ -2,8 +2,12 @@ import mongoose, { Schema } from 'mongoose'
 
 const viewSchema = new Schema({
   content: {
-    head: String,
-    sub: String,
+    head: {
+      type: String,
+    },
+    sub: {
+      type: String,
+    },
   },
   animation: {
     type: String
@@ -12,15 +16,15 @@ const viewSchema = new Schema({
     type: String
   }
 }, {
-  timestamps: true,
-  toJSON: {
-    virtuals: true,
-    transform: (obj, ret) => { delete ret._id }
-  }
-})
+    timestamps: true,
+    toJSON: {
+      virtuals: true,
+      transform: (obj, ret) => { delete ret._id }
+    }
+  })
 
 viewSchema.methods = {
-  view (full) {
+  view(full) {
     const view = {
       // simple view
       id: this.id,
