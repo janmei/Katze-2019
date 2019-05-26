@@ -2,7 +2,8 @@ import mongoose, { Schema } from 'mongoose'
 
 const viewSchema = new Schema({
   content: {
-    type: String
+    head: String,
+    sub: String,
   },
   animation: {
     type: String

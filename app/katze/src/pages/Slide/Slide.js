@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Slide.css';
+import axios from 'axios';
 
 class Slide extends Component {
   constructor({ match }) {
@@ -10,6 +11,17 @@ class Slide extends Component {
       id: match.params.id,
     };
   }
+
+  componentDidMount() {
+    axios.get('http://localhost:9000/views/'+this.state.id).then(res => {
+      // this.setState({
+      //   semesters: res.data
+      // })
+    }).catch(function (err) {
+      console.log(err);
+    })
+  }
+
   render() {
     return <div className="Slide">Slide View: {this.state.id}</div>;
   }

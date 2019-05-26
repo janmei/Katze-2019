@@ -19,6 +19,8 @@ import qs from 'qs';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import Views from '../../components/Views/Views';
+
 class Admin extends Component {
   constructor() {
     super();
@@ -30,7 +32,8 @@ class Admin extends Component {
       semesters: [],
       selectedSemester: {},
       teams: [],
-      selectedTeam: {}
+      selectedTeam: {},
+      views: []
     };
   }
 
@@ -104,7 +107,7 @@ class Admin extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-
+        <Views></Views>
         <SwipeableDrawer
           id="sideMenu"
           anchor="right"
@@ -129,9 +132,9 @@ class Admin extends Component {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={1}>Mocked Template A</MenuItem>
-                <MenuItem value={2}>Mocked Template B</MenuItem>
-                <MenuItem value={3}>Mocked Template C</MenuItem>
+                <MenuItem value={1}>Teams</MenuItem>
+                <MenuItem value={2}>Zeitplan</MenuItem>
+                <MenuItem value={3}>Countdown</MenuItem>
               </Select>
             </FormControl>
             <Divider />

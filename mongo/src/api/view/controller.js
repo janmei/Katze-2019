@@ -10,10 +10,9 @@ export const create = ({ bodymen: { body } }, res, next) =>
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
   View.count(query)
     .then(count => View.find(query, select, cursor)
-      .then((views) => ({
-        count,
-        rows: views.map((view) => view.view())
-      }))
+      .then((views) => (
+        views.map((view) => view.view())
+      ))
     )
     .then(success(res))
     .catch(next)
