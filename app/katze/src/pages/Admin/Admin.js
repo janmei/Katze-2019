@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Admin.css';
 
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -119,8 +119,9 @@ class Admin extends Component {
           </Toolbar>
         </AppBar>
         <Views views={this.state.views}></Views>
-        <SwipeableDrawer
+        <Drawer
           id="sideMenu"
+          variant="permanent"
           anchor="right"
           open={this.state.menu}
           onClose={this.toggleDrawer(false)}
@@ -187,7 +188,7 @@ class Admin extends Component {
               Countdown
             </Typography>
           </div>
-        </SwipeableDrawer>
+        </Drawer>
       </div>
     );
   }

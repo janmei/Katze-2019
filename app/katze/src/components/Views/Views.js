@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Box from '@material-ui/core/Box';
+
 import './Views.css';
 import axios from 'axios';
 import View from '../View/View';
@@ -8,8 +10,6 @@ class Views extends Component {
         super();
 
     }
-
-
 
     renderNames() {
 
@@ -27,7 +27,9 @@ class Views extends Component {
     render() {
         return (
             <div>
-                {this.renderNames()}
+                <Box display="flex">
+                    {this.renderNames()}
+                </Box>
             </div>
         )
     }

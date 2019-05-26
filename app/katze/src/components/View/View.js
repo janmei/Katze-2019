@@ -6,26 +6,36 @@ import { withStyles } from '@material-ui/core/styles';
 import { Card } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 
 
 class View extends Component {
     constructor() {
         super();
+
+        this.state = {
+            checked: false
+        }
     }
+
+    handleChange = name => event => {
+        this.setState({ ...this.state, [name]: event.target.checked });
+    };
 
     render() {
         return (
-            <Card className="card">
+            <Card className="card" m={2} width={1 / 4}>
                 <CardContent>
-                    <Typography color="textSecondary">
+                    <Typography variant="h6" component="p">
                         {this.props.title}
+                    </Typography>
+                    <Typography variant="subtitle1" component="p">
                         {this.props.sub}
                     </Typography>
                 </CardContent>
-                <CardActions>
-                    <Button size="small">Learn More</Button>
+                <CardActions >
+                    <Checkbox checked={this.state.checked} onChange={this.handleChange('checked')} value="checked" />
                 </CardActions>
             </Card>
         );

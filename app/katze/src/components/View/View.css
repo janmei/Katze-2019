@@ -1,6 +1,7 @@
     .card {
         max-width: 275px;
-        height: 200px;
+        width: 100%;
+        margin: 16px;
     }
     .bullet {
         display: inline-block;
