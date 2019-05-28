@@ -23,7 +23,7 @@ export const show = ({ params }, res, next) =>
     .catch(next)
 
 export const update = (req, res, next) =>
-  Team.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+  Semester.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
     .then(notFound(res))
     .then(success(res))
     .catch(next)
