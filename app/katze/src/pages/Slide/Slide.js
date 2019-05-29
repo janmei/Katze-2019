@@ -11,6 +11,7 @@ class Slide extends Component {
     // SET THE SLIDE ID TO GLOBAL STATE
     this.state = {
       id: match.params.id,
+      viewData: {}
     };
   }
 
@@ -18,11 +19,13 @@ class Slide extends Component {
     axios
       .get('http://localhost:9000/views/' + this.state.id)
       .then(res => {
-        // this.setState({
-        //   semesters: res.data
-        // })
+        console.log(res.data);
+
+        this.setState({
+          viewData: res.data
+        })
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
       });
   }
@@ -30,7 +33,7 @@ class Slide extends Component {
   render() {
     return (
       <div className="Slide">
-        <Titelblob />
+        <Titelblob content={this.state.viewData.content} />
         <UnityScene />
       </div>
     );

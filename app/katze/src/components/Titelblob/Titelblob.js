@@ -3,22 +3,27 @@ import './Titelblob.css';
 import axios from 'axios';
 
 class Titelblob extends Component {
-  // constructor(props) {
-  //     super(props);
+  constructor(props) {
+    super(props);
 
-  //     // this.state = {
-  //     //     checked: false
-  //     // }
-  // }
+    this.state = {
+      content: {}
+    }
 
-  // handleChange = name => event => {
-  //     this.setState({ ...this.state, [name]: event.target.checked });
-  // };
+  }
+
+  componentWillReceiveProps(next) {
+    console.log(next);
+
+    this.setState({
+      content: next.content
+    })
+  }
 
   render() {
     return (
       <div className="InfoLayer">
-        <h1>THIS IS A HEADLINE</h1>
+        <h1>{this.state.content.head}</h1>
         <svg id="blob" width="100%" height="100%" fill="none">
           <path fill="#FFFFFF">
             <animate
