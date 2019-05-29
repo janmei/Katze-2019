@@ -2,22 +2,28 @@ import React, { Component } from 'react';
 import './Countdown.css';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
-
+import moment from 'moment';
 import { TextField, Box } from '@material-ui/core';
+
 
 
 
 class Countdown extends Component {
     constructor() {
         super();
-
-        this.state = {
-            checked: false
-        }
     }
 
     handleChange = name => event => {
-        this.setState({ ...this.state, [name]: event.target.checked });
+        var time = event.target.value;
+        var timeArray = time.split(":");
+
+        var now = new Date();
+        var endMinutes = moment(now).add(timeArray[0], 'minutes')
+        var endTime = moment(endMinutes).add(timeArray[1], 'seconds')
+
+        console.log(endTime);
+        
+        // this.setState({ ...this.state, [name]: event.target.value });
     };
 
     render() {
@@ -35,6 +41,7 @@ class Countdown extends Component {
                     inputProps={{
                         step: 60, // 5 min
                     }}
+                    onChange={this.handleChange('countdown')}
                 />
             </Box>
         );
