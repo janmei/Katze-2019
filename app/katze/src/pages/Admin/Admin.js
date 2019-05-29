@@ -95,9 +95,9 @@ class Admin extends Component {
 
     var team = qs.stringify({
       content: {
-        head: "hah",
         countdown: this.state.countdown
       },
+      team_layer: this.state.selectedTeam.id
     }, { allowDots: true })
 
     const config = {
@@ -131,7 +131,7 @@ class Admin extends Component {
   renderTeams() {
     if (this.state.teams != null) {
       return this.state.teams.map((item, i) => {
-        return <MenuItem value={item.name}>{item.name}</MenuItem>;
+        return <MenuItem value={item}>{item.name}</MenuItem>;
       });
     } else {
       return;

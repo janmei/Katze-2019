@@ -8,17 +8,15 @@ export const create = ({ bodymen: { body } }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
-  View.count(query)
-    .then(count => View.find(query, select, cursor)
-      .then((views) => (
-        views.map((view) => view.view())
-      ))
-    )
+  View.find(query, select, cursor)
+    .populate('team_layer')
+    .then((views) => views.map((view) => view.view()))
     .then(success(res))
     .catch(next)
 
 export const show = ({ params }, res, next) =>
   View.findOne({ name: params.id })
+    .populate('team_layer')
     .then(notFound(res))
     .then((view) => view ? view.view() : null)
     .then(success(res))

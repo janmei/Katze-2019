@@ -12,6 +12,10 @@ const viewSchema = new Schema({
       type: String,
     }
   },
+  team_layer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Team'
+  },
   animation: {
     type: String
   },
@@ -32,6 +36,7 @@ viewSchema.methods = {
       // simple view
       id: this.id,
       content: this.content,
+      team_layer: this.team_layer,
       animation: this.animation,
       name: this.name,
       createdAt: this.createdAt,
