@@ -11,6 +11,12 @@ import { TextField, Box } from '@material-ui/core';
 class Countdown extends Component {
     constructor() {
         super();
+
+        this.state = {
+            countdown: Date
+        }
+
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange = name => event => {
@@ -19,11 +25,11 @@ class Countdown extends Component {
 
         var now = new Date();
         var endMinutes = moment(now).add(timeArray[0], 'minutes')
-        var endTime = moment(endMinutes).add(timeArray[1], 'seconds')
+        var endTime = moment(endMinutes).add(timeArray[1], 'seconds').toDate()
 
-        console.log(endTime);
-        
-        // this.setState({ ...this.state, [name]: event.target.value });
+        this.setState({ ...this.state, [name]: endTime });
+
+        this.props.getTargetTime(endTime)
     };
 
     render() {
