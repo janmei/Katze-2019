@@ -9,10 +9,11 @@ import axios from 'axios';
 // unityContent.send("SpawnController", "StartGame");
 
 class UnityScene extends Component {
-  constructor() {
+  constructor(props) {
+    super(props);
     this.unityContent = new UnityContent(
-      'UnityBuild/Build.json',
-      'UnityBuild/UnityLoader.js',
+      'Animation/TestSceneHD.json',
+      'Animation/UnityLoader.js',
     );
   }
 
