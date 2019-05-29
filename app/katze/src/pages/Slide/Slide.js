@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Slide.css';
 import axios from 'axios';
+import Titelblob from '../../components/Titelblob/Titelblob';
 
 class Slide extends Component {
   constructor({ match }) {
@@ -23,7 +24,9 @@ class Slide extends Component {
   }
 
   render() {
-    return <div className="Slide">Slide View: {this.state.id}</div>;
+    return (
+       <Titelblob/>
+    );
   }
 }
 
