@@ -18,7 +18,7 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .catch(next)
 
 export const show = ({ params }, res, next) =>
-  View.findById(params.id)
+  View.findOne({ name: params.id })
     .then(notFound(res))
     .then((view) => view ? view.view() : null)
     .then(success(res))
