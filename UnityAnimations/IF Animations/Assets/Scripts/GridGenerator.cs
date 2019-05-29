@@ -8,6 +8,10 @@ public class GridGenerator : MonoBehaviour
     public float COLS;
     public float ROWS;
 
+	public List<GameObject> grid = new List<GameObject> ();
+
+	private int currentCube = 0;
+
     void Start()
     {
 
@@ -20,7 +24,8 @@ public class GridGenerator : MonoBehaviour
             {
                 GameObject cube = Instantiate(SingleCubeTemplate);
                 cube.name= "Box(" + col + "/" + row + ")";
-
+				grid.Add (cube);
+				cube.transform.parent = this.gameObject.transform;
                 float x = Mathf.Ceil(row / 2f) - col;
                 float y = row * -1f;
                 float z = Mathf.Floor(row / 2) + col;
@@ -33,9 +38,10 @@ public class GridGenerator : MonoBehaviour
         SingleCubeTemplate.SetActive(false);
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        
+		
     }
 }
