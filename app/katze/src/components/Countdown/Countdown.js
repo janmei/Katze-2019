@@ -13,7 +13,7 @@ class Countdown extends Component {
         super();
 
         this.state = {
-            countdown: Date
+            countdown: new Date()
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -37,9 +37,9 @@ class Countdown extends Component {
             <Box m={2} display="flex">
                 <TextField
                     id="time"
-                    label="Alarm clock"
+                    label="Dauer"
                     type="time"
-                    defaultValue="10:00"
+                    defaultValue="00:00"
                     className="countdownInput"
                     InputLabelProps={{
                         shrink: true,

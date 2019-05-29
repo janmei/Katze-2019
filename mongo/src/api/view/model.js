@@ -9,7 +9,7 @@ const viewSchema = new Schema({
       type: String,
     },
     countdown: {
-      type: Date,
+      type: String,
     }
   },
   animation: {

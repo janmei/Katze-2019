@@ -36,7 +36,12 @@ class Admin extends Component {
       teams: [],
       selectedTeam: {},
       views: [],
-      selectedViews: []
+      selectedViews: [],
+      content: {
+        countdown: Date,
+        head: "",
+        sub: ""
+      }
     };
   }
 
@@ -88,20 +93,28 @@ class Admin extends Component {
 
   handleSubmit = e => {
 
-    const team = qs.stringify({
+    var team = qs.stringify({
+      content: {
+        head: "hah",
+        countdown: this.state.countdown
+      },
+    }, { allowDots: true })
 
-    }, { arrayFormat: 'repeat' })
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
 
-    axios.post('http://localhost:9000/views/' + this.state.id, team, config)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+    for (var view of this.state.selectedViews) {
+      console.log(team);
+      axios.post('http://localhost:9000/views/' + view, team, config)
+        .then(res => {
+          console.log(res);
+        })
+    }
+
+    e.preventDefault();
 
   }
 
@@ -221,9 +234,9 @@ class Admin extends Component {
               <Typography component="h2" variant="h5" gutterBottom>
                 Countdown
             </Typography>
-              <Countdown getTargetTime={this.handleChange('countdown')} />
+              <Countdown getTargetTime={this.handleArrayChange('countdown')} />
 
-              <Button color="primary" variant="contained" onClick={this.handleSubmit()}>
+              <Button color="primary" variant="contained" type="submit">
                 Senden
             </Button>
             </div>
