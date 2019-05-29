@@ -7,16 +7,25 @@ class Titelblob extends Component {
     super(props);
 
     this.state = {
-      content: {}
+      content: {
+        head: "",
+        sub: "",
+        countdown: ""
+      },
+      animation: "",
+      team_layer: {},
     }
-
   }
 
   componentWillReceiveProps(next) {
-    console.log(next);
-
     this.setState({
-      content: next.content
+      content: {
+        head: next.data.content.head,
+        sub: next.data.content.sub,
+        countdown: next.data.content.countdown
+      },
+      animation: next.data.animation,
+      team_layer: next.data.team_layer
     })
   }
 

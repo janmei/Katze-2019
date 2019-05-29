@@ -30,10 +30,26 @@ class Slide extends Component {
       });
   }
 
+  // function to call for socket handling
+  updateContent = () => {
+    axios
+      .get('http://localhost:9000/views/' + this.state.id)
+      .then(res => {
+        console.log(res.data);
+
+        this.setState({
+          viewData: res.data
+        })
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="Slide">
-        <Titelblob content={this.state.viewData.content} />
+        <Titelblob data={this.state.viewData} />
         <UnityScene />
       </div>
     );
