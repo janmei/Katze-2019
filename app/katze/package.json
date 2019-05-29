@@ -15,6 +15,7 @@
     "react-final-form-arrays": "^2.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
+    "react-unity-webgl": "^7.1.1",
     "request": "^2.88.0",
     "whatwg-fetch": "^3.0.0"
   },
