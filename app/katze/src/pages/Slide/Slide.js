@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Slide.css';
 import axios from 'axios';
+import Titelblob from '../../components/Titelblob/Titelblob';
+import UnityScene from '../../components/UnityScene/UnityScene';
 
 class Slide extends Component {
   constructor({ match }) {
@@ -13,17 +15,25 @@ class Slide extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:9000/views/'+this.state.id).then(res => {
-      // this.setState({
-      //   semesters: res.data
-      // })
-    }).catch(function (err) {
-      console.log(err);
-    })
+    axios
+      .get('http://localhost:9000/views/' + this.state.id)
+      .then(res => {
+        // this.setState({
+        //   semesters: res.data
+        // })
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 
   render() {
-    return <div className="Slide">Slide View: {this.state.id}</div>;
+    return (
+      <div>
+        <Titelblob />
+        <UnityScene />
+      </div>
+    );
   }
 }
 

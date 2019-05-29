@@ -40,26 +40,29 @@ class Admin extends Component {
     };
   }
 
-
   componentDidMount() {
-    axios.get('http://localhost:9000/semesters/').then(res => {
-      this.setState({
-        semesters: res.data
+    axios
+      .get('http://localhost:9000/semesters/')
+      .then(res => {
+        this.setState({
+          semesters: res.data,
+        });
       })
-    }).catch(function (err) {
-      console.log(err);
-    })
+      .catch(function(err) {
+        console.log(err);
+      });
 
-    axios.get('http://localhost:9000/views/').then(res => {
-      this.setState({
-        views: res.data
+    axios
+      .get('http://localhost:9000/views/')
+      .then(res => {
+        this.setState({
+          views: res.data,
+        });
+        console.log(this.state.views);
       })
-      console.log(this.state.views);
-
-
-    }).catch(function (err) {
-      console.log(err);
-    })
+      .catch(function(err) {
+        console.log(err);
+      });
   }
 
   toggleDrawer = open => () => {
@@ -75,18 +78,15 @@ class Admin extends Component {
   handleSelectChange = name => event => {
     this.setState({
       [name]: event.target.value,
-      teams: event.target.value.teams
+      teams: event.target.value.teams,
     });
-
   };
 
   renderNames() {
     if (this.state.semesters != null) {
       return this.state.semesters.map((item, i) => {
-        return (
-          <MenuItem value={item}>{item.year}</MenuItem>
-        )
-      })
+        return <MenuItem value={item}>{item.year}</MenuItem>;
+      });
     } else {
       return;
     }
@@ -95,10 +95,8 @@ class Admin extends Component {
   renderTeams() {
     if (this.state.teams != null) {
       return this.state.teams.map((item, i) => {
-        return (
-          <MenuItem value={item.name}>{item.name}</MenuItem>
-        )
-      })
+        return <MenuItem value={item.name}>{item.name}</MenuItem>;
+      });
     } else {
       return;
     }
@@ -121,7 +119,7 @@ class Admin extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Views views={this.state.views}></Views>
+        <Views views={this.state.views} />
         <Drawer
           id="sideMenu"
           variant="permanent"
@@ -131,7 +129,6 @@ class Admin extends Component {
           onOpen={this.toggleDrawer(true)}
         >
           <div className="menuWidth">
-
             <Typography component="h2" variant="h5" gutterBottom>
               Template
             </Typography>
@@ -147,24 +144,29 @@ class Admin extends Component {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={"teams"}>Teams</MenuItem>
-                <MenuItem value={"schedule"}>Zeitplan</MenuItem>
-                <MenuItem value={"countdown"}>Countdown</MenuItem>
+                <MenuItem value={'teams'}>Teams</MenuItem>
+                <MenuItem value={'schedule'}>Zeitplan</MenuItem>
+                <MenuItem value={'countdown'}>Countdown</MenuItem>
               </Select>
             </FormControl>
-            {this.state.template == "teams" &&
+            {this.state.template == 'teams' && (
               <div>
                 <Divider />
                 <Typography component="h2" variant="h5" gutterBottom>
                   Info Layer
-            </Typography>
+                </Typography>
                 <FormControl className="menuForm" variant="outlined">
-                  <InputLabel htmlFor="outlined-age-simple">Semester</InputLabel>
+                  <InputLabel htmlFor="outlined-age-simple">
+                    Semester
+                  </InputLabel>
                   <Select
                     value={this.state.selectedSemester}
                     onChange={this.handleSelectChange('selectedSemester')}
                     input={
-                      <OutlinedInput name="semesters" id="outlined-age-simple" />
+                      <OutlinedInput
+                        name="semesters"
+                        id="outlined-age-simple"
+                      />
                     }
                   >
                     <MenuItem value="">
@@ -189,14 +191,16 @@ class Admin extends Component {
                   </Select>
                 </FormControl>
               </div>
-            }
+            )}
             <Divider />
             <Typography component="h2" variant="h5" gutterBottom>
               Countdown
             </Typography>
-            <Countdown></Countdown>
+            <Countdown />
 
-            <Button color="primary" variant="contained">Senden</Button>
+            <Button color="primary" variant="contained">
+              Senden
+            </Button>
           </div>
         </Drawer>
       </div>
