@@ -1,10 +1,21 @@
 h1 {
-    color: white;
-    font-size: 20vmin;
-    line-height: 1;
-    font-weight: bold;
-    letter-spacing: 2px;
-    font-family: 'Righteous', sans-serif;
-    text-transform: uppercase;
-    padding-left: 40px;
-  }
+  color: white;
+  font-size: 20vmin;
+  line-height: 1;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: 'Righteous', sans-serif;
+  text-transform: uppercase;
+  padding-left: 40px;
+}
+
+.InfoLayer {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+svg#blob {
+  transform: scale3d(3, 3, 3) translate3d(402px, 179px, 0px);
+}

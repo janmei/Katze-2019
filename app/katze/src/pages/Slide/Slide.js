@@ -29,7 +29,7 @@ class Slide extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Slide">
         <Titelblob />
         <UnityScene />
       </div>

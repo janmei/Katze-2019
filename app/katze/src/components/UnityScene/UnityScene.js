@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './UnityScene.css';
 import Unity, { UnityContent } from 'react-unity-webgl';
 
-import axios from 'axios';
-
 // https://github.com/elraccoone/react-unity-webgl/wiki/Unity-Content
 // SEND MESSAGES
 // unityContent.send("SpawnController", "StartGame");
@@ -11,17 +9,25 @@ import axios from 'axios';
 class UnityScene extends Component {
   constructor(props) {
     super(props);
+
     this.unityContent = new UnityContent(
-      'Animation/TestSceneHD.json',
-      'Animation/UnityLoader.js',
+      '/Animation/TestSceneHD.json',
+      '/Animation/UnityLoader.js',
     );
+  }
+
+  componentDidMount() {
+    // Listener für Scene Switch
   }
 
   render() {
     return (
-      <div>
-        <Unity unityContent={this.unityContent} />
-      </div>
+      <Unity
+        className="UnityAnimation"
+        unityContent={this.unityContent}
+        height="100%"
+        width="100%"
+      />
     );
   }
 }
