@@ -11,6 +11,7 @@
   display: flex;
   justify-content: space-between;
 }
+/* 
 
 .menuItem {
   padding-left: 16px !important;
@@ -25,19 +26,18 @@
 .menuSelect {
   padding-bottom: 20px;
 }
-
+*/
 .menuForm {
-  padding-left: 16px !important;
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
   width: 90%;
 }
 
-.menuForm label {
+/* .menuForm label {
   margin-top: 5%;
   margin-left: 4%;
-}
+} 
 
 .menuForm div {
-  width: 100%;
-}
+  width: 90%;
+  margin: 9 auto;
+} 
+*/

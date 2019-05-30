@@ -72,7 +72,6 @@ class Admin extends Component {
         this.setState({
           views: res.data,
         });
-        console.log(this.state.views);
       })
       .catch(function (err) {
         console.log(err);
@@ -209,25 +208,26 @@ class Admin extends Component {
               <Typography component="h2" variant="h5" gutterBottom>
                 Template
             </Typography>
-              <FormControl className="menuForm" variant="outlined">
-                <InputLabel htmlFor="outlined-age-simple">Template</InputLabel>
-                <Select
-                  value={this.state.template}
-                  onChange={this.handleChange('template')}
-                  input={
-                    <OutlinedInput name="template" id="outlined-age-simple" />
-                  }
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={'teams'}>Teams</MenuItem>
-                  <MenuItem value={'text'}>Text</MenuItem>
-                  <MenuItem value={'schedule'}>Zeitplan</MenuItem>
-                  <MenuItem value={'countdown'}>Countdown</MenuItem>
-                </Select>
-              </FormControl>
-
+              <Box m={2}>
+                <FormControl className="menuForm" variant="outlined" fullWidth margin="normal">
+                  <InputLabel htmlFor="outlined-age-simple">Template</InputLabel>
+                  <Select
+                    value={this.state.template}
+                    onChange={this.handleChange('template')}
+                    input={
+                      <OutlinedInput name="template" labelWidth={65} id="outlined-age-simple" />
+                    }
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={'teams'}>Teams</MenuItem>
+                    <MenuItem value={'text'}>Text</MenuItem>
+                    <MenuItem value={'schedule'}>Zeitplan</MenuItem>
+                    <MenuItem value={'countdown'}>Countdown</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
               {/* TEAM TEMPLATE */}
               {this.state.template === 'teams' && (
                 <div>
@@ -235,41 +235,40 @@ class Admin extends Component {
                   <Typography component="h2" variant="h5" gutterBottom>
                     Info Layer
                 </Typography>
-                  <FormControl className="menuForm" variant="outlined">
-                    <InputLabel htmlFor="outlined-age-simple">
-                      Semester
+                  <Box m={2}>
+                    <FormControl className="menuForm" variant="outlined" fullWidth margin="normal">
+                      <InputLabel htmlFor="outlined-age-simple">
+                        Semester
                   </InputLabel>
-                    <Select
-                      value={this.state.selectedSemester}
-                      onChange={this.handleSelectChange('selectedSemester')}
-                      input={
-                        <OutlinedInput
-                          name="semesters"
-                          id="outlined-age-simple"
-                        />
-                      }
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {this.renderNames()}
-                    </Select>
-                  </FormControl>
-                  <FormControl className="menuForm" variant="outlined">
-                    <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
-                    <Select
-                      value={this.state.selectedTeam}
-                      onChange={this.handleChange('selectedTeam')}
-                      input={
-                        <OutlinedInput name="teams" id="outlined-age-simple" />
-                      }
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      {this.renderTeams()}
-                    </Select>
-                  </FormControl>
+                      <Select
+                        value={this.state.selectedSemester || 'none'}
+                        onChange={this.handleSelectChange('selectedSemester')}
+                        input={
+                          <OutlinedInput name="semesters" labelWidth={65} id="outlined-age-simple" />
+                        }
+                      >
+                        <MenuItem value="none">
+                          <em>None</em>
+                        </MenuItem>
+                        {this.renderNames()}
+                      </Select>
+                    </FormControl>
+                    <FormControl className="menuForm" variant="outlined" fullWidth margin="normal">
+                      <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
+                      <Select
+                        value={this.state.selectedTeam || 'none'}
+                        onChange={this.handleChange('selectedTeam')}
+                        input={
+                          <OutlinedInput name="teams" labelWidth={52} id="outlined-age-simple" />
+                        }
+                      >
+                        <MenuItem value="none">
+                          <em>None</em>
+                        </MenuItem>
+                        {this.renderTeams()}
+                      </Select>
+                    </FormControl>
+                  </Box>
                 </div>
               )}
 
@@ -299,7 +298,6 @@ class Admin extends Component {
                     variant="outlined"
                     fullWidth
                   />
-
                 </div>
               )}
               <Divider />
@@ -317,9 +315,11 @@ class Admin extends Component {
               {this.state.countdown_active && (
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
-              <Button color="primary" variant="contained" type="submit">
-                Senden
+              <Box m={2}>
+                <Button color="primary" variant="contained" type="submit">
+                  Senden
             </Button>
+              </Box>
             </div>
           </Drawer>
         </form>
