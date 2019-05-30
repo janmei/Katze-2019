@@ -195,7 +195,7 @@ class Admin extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
-          <Views views={this.state.views} onChange={this.handleArrayChange('selectedViews')} />
+          <Views views={this.state.views} onChange={this.handleArrayChange('selectedViews')} viewAdded={this.updateViews}/>
           <Drawer
             id="sideMenu"
             variant="permanent"

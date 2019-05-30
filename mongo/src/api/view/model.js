@@ -4,9 +4,11 @@ const viewSchema = new Schema({
   content: {
     head: {
       type: String,
+      default: "Hello World"
     },
     sub: {
       type: String,
+      default: "Welcome to if 2019"
     },
     countdown: {
       type: String,
