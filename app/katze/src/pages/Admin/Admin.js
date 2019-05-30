@@ -279,6 +279,7 @@ class Admin extends Component {
                   <Typography component="h2" variant="h5" gutterBottom>
                     Info Layer
                 </Typography>
+                  <Box m={2}>
 
                   <TextField
                     id="outlined-name"
@@ -297,7 +298,8 @@ class Admin extends Component {
                     margin="normal"
                     variant="outlined"
                     fullWidth
-                  />
+                    />
+                    </Box>
                 </div>
               )}
               <Divider />
