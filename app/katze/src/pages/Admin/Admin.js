@@ -14,6 +14,8 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Switch from '@material-ui/core/Switch'
+import TextField from '@material-ui/core/TextField'
 import axios from 'axios';
 import qs from 'qs';
 import IconButton from '@material-ui/core/IconButton';
@@ -21,7 +23,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import Views from '../../components/Views/Views';
 import Countdown from '../../components/Countdown/Countdown';
-import { Button } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
 
 class Admin extends Component {
   constructor() {
@@ -41,8 +43,15 @@ class Admin extends Component {
         countdown: Date,
         head: "",
         sub: ""
-      }
+      },
+      countdown_active: false,
     };
+
+    this.handleArrayChange = this.handleArrayChange.bind(this)
+    this.handleContentChange = this.handleContentChange.bind(this)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSwitchChange = this.handleSwitchChange.bind(this)
   }
 
   componentDidMount() {
@@ -70,6 +79,20 @@ class Admin extends Component {
       });
   }
 
+  updateViews = () => {
+    axios
+      .get('http://localhost:9000/views/')
+      .then(res => {
+        this.setState({
+          views: res.data,
+        });
+        console.log(this.state.views);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  }
+
   toggleDrawer = open => () => {
     this.setState({
       menu: open,
@@ -84,6 +107,16 @@ class Admin extends Component {
     this.setState({ [name]: event.target.value });
   };
 
+  handleContentChange = name => event => {
+    var content = { ...this.state.content }
+    content[name] = event.target.value
+    this.setState({ content });
+  };
+
+  handleSwitchChange = name => event => {
+    this.setState({ [name]: event.target.checked });
+  };
+
   handleSelectChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -95,9 +128,13 @@ class Admin extends Component {
 
     var team = qs.stringify({
       content: {
-        countdown: this.state.countdown
+        countdown: this.state.countdown,
+        head: this.state.content.head,
+        sub: this.state.content.sub
       },
-      team_layer: this.state.selectedTeam.id
+      countdown_active: this.state.countdown_active,
+      team_layer: this.state.selectedTeam.id,
+      animation: this.state.template
     }, { allowDots: true })
 
     const config = {
@@ -111,8 +148,10 @@ class Admin extends Component {
       axios.post('http://localhost:9000/views/' + view, team, config)
         .then(res => {
           console.log(res);
+          this.updateViews();
         })
     }
+
 
     e.preventDefault();
 
@@ -183,10 +222,13 @@ class Admin extends Component {
                     <em>None</em>
                   </MenuItem>
                   <MenuItem value={'teams'}>Teams</MenuItem>
+                  <MenuItem value={'text'}>Text</MenuItem>
                   <MenuItem value={'schedule'}>Zeitplan</MenuItem>
                   <MenuItem value={'countdown'}>Countdown</MenuItem>
                 </Select>
               </FormControl>
+
+              {/* TEAM TEMPLATE */}
               {this.state.template === 'teams' && (
                 <div>
                   <Divider />
@@ -230,12 +272,51 @@ class Admin extends Component {
                   </FormControl>
                 </div>
               )}
-              <Divider />
-              <Typography component="h2" variant="h5" gutterBottom>
-                Countdown
-            </Typography>
-              <Countdown getTargetTime={this.handleArrayChange('countdown')} />
 
+              {/* TEXT TEMPLATE */}
+              {this.state.template === 'text' && (
+                <div>
+                  <Divider />
+                  <Typography component="h2" variant="h5" gutterBottom>
+                    Info Layer
+                </Typography>
+
+                  <TextField
+                    id="outlined-name"
+                    label="Titel"
+                    value={this.state.content.head || ''}
+                    onChange={this.handleContentChange('head')}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                  />
+                  <TextField
+                    id="outlined-name"
+                    label="Untertitel"
+                    value={this.state.content.sub || ''}
+                    onChange={this.handleContentChange('sub')}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                  />
+
+                </div>
+              )}
+              <Divider />
+              <Box display="flex" alignItems="center">
+                <Typography component="h2" variant="h5" gutterBottom>
+                  Countdown
+                </Typography>
+                <Switch
+                  checked={this.state.countdown_active}
+                  onChange={this.handleSwitchChange('countdown_active')}
+                  value="checked"
+                  color="primary"
+                />
+              </Box>
+              {this.state.countdown_active && (
+                <Countdown getTargetTime={this.handleArrayChange('countdown')} />
+              )}
               <Button color="primary" variant="contained" type="submit">
                 Senden
             </Button>

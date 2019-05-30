@@ -10,6 +10,10 @@ const viewSchema = new Schema({
     },
     countdown: {
       type: String,
+    },
+    countdown_active: {
+      type: Boolean,
+      default: false,
     }
   },
   team_layer: {
