@@ -22,6 +22,8 @@ io.on('connection', socket => {
 		axios
 			.get('http://localhost:9000/views/name/' + data)
 			.then(res => {
+				// console.log(res.data);
+
 				socket.emit('get_data', res.data);
 			})
 			.catch(function(err) {
@@ -35,9 +37,7 @@ io.on('connection', socket => {
 		axios
 			.get('http://localhost:9000/views/' + data)
 			.then(res => {
-				console.log(res.data);
-
-				socket.emit(res.data.name, res.data);
+				socket.broadcast.emit('get_data', res.data);
 			})
 			.catch(function(err) {
 				console.log(err);

@@ -24,8 +24,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Views from '../../components/Views/Views';
 import Countdown from '../../components/Countdown/Countdown';
 import { Button, Box } from '@material-ui/core';
-const io = require('socket.io-client');
-const socket = io('http://localhost:3001');
+import { updateData } from '../../global/socket';
+
 
 class Admin extends Component {
   constructor() {
@@ -145,13 +145,12 @@ class Admin extends Component {
     }
 
     for (var view of this.state.selectedViews) {
-      console.log(team);
       axios.post('http://localhost:9000/views/' + view, team, config)
         .then(res => {
-          // console.log(res);
+          console.log(res.data.id);
           this.updateViews();
 
-          socket.emit('update_data', view)
+          updateData(res.data.id)
 
         })
     }
