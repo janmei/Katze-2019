@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import './Titelblob.css';
+import Countdown, { calcTimeDelta } from 'react-countdown-now';
+
+const renderer = ({ hours, minutes, seconds, completed }) => {
+	return (
+		<span>
+			{minutes}:{seconds}
+		</span>
+	);
+};
 
 class Titelblob extends Component {
 	constructor(props) {
@@ -9,7 +18,8 @@ class Titelblob extends Component {
 			content: {
 				head: '',
 				sub: '',
-				countdown: ''
+				countdown: '',
+				countdown_active: false
 			},
 			animation: '',
 			team_layer: {}
@@ -21,17 +31,37 @@ class Titelblob extends Component {
 			content: {
 				head: next.data.content.head,
 				sub: next.data.content.sub,
-				countdown: next.data.content.countdown
+				countdown: next.data.content.countdown,
+				countdown_active: next.data.content.countdown_active
 			},
 			animation: next.data.animation,
 			team_layer: next.data.team_layer
 		});
+		if (this.state.countdown_active) {
+			// setCountdown(this.state.content.countdown);
+		}
+	}
+
+	checkTime(delta) {
+		// console.log(delta);
+		// check if remaining time is 10 sendonds
+		if (delta.total == 10000) {
+			//trigger something
+		}
 	}
 
 	render() {
 		return (
 			<div className="InfoLayer">
+				{this.state.content.countdown_active && (
+					<Countdown
+						date={this.state.content.countdown}
+						onTick={this.checkTime}
+						renderer={renderer}
+					/>
+				)}
 				<h1>{this.state.content.head}</h1>
+				<h6>{this.state.content.sub}</h6>
 				<svg id="blob" width="100%" height="100%" fill="none">
 					<path fill="#FFFFFF">
 						<animate

@@ -131,9 +131,9 @@ class Admin extends Component {
       content: {
         countdown: this.state.countdown,
         head: this.state.content.head,
-        sub: this.state.content.sub
+        sub: this.state.content.sub,
+        countdown_active: this.state.countdown_active,
       },
-      countdown_active: this.state.countdown_active,
       team_layer: this.state.selectedTeam.id,
       animation: this.state.template
     }, { allowDots: true })

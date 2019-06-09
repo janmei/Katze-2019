@@ -11,6 +11,7 @@
     "moment": "^2.24.0",
     "qs": "^6.7.0",
     "react": "^16.8.6",
+    "react-countdown-now": "^2.1.0",
     "react-dom": "^16.8.6",
     "react-final-form": "^4.1.0",
     "react-final-form-arrays": "^2.0.3",
