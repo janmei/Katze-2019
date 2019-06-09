@@ -14,8 +14,16 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .then(success(res))
     .catch(next)
 
-export const show = ({ params }, res, next) =>
+export const showByName = ({ params }, res, next) =>
   View.findOne({ name: params.id })
+    .populate('team_layer')
+    .then(notFound(res))
+    .then((view) => view ? view.view() : null)
+    .then(success(res))
+    .catch(next)
+
+export const show = ({ params }, res, next) =>
+  View.findById(params.id)
     .populate('team_layer')
     .then(notFound(res))
     .then((view) => view ? view.view() : null)

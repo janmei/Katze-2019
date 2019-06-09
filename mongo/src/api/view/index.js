@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { middleware as query } from 'querymen'
 import { middleware as body } from 'bodymen'
-import { create, index, show, update, destroy } from './controller'
+import { create, index, show, showByName, update, destroy } from './controller'
 import { schema } from './model'
 export View, { schema } from './model'
 
@@ -19,9 +19,7 @@ const { content, animation, name } = schema.tree
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 View not found.
  */
-router.post('/',
-  body({ content, animation, name }),
-  create)
+router.post('/', body({ content, animation, name }), create)
 
 /**
  * @api {get} /views Retrieve views
@@ -32,9 +30,7 @@ router.post('/',
  * @apiSuccess {Object[]} rows List of views.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/',
-  query(),
-  index)
+router.get('/', query(), index)
 
 /**
  * @api {get} /views/:id Retrieve view
@@ -44,8 +40,17 @@ router.get('/',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 View not found.
  */
-router.get('/:id',
-  show)
+router.get('/:id', show)
+
+/**
+ * @api {get} /views/name/:id Retrieve view by view name
+ * @apiName RetrieveView
+ * @apiGroup View
+ * @apiSuccess {Object} view View's data.
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError 404 View not found.
+ */
+router.get('/name/:id', showByName)
 
 /**
  * @api {put} /views/:id Update view
@@ -58,8 +63,7 @@ router.get('/:id',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 View not found.
  */
-router.post('/:id',
-  update)
+router.post('/:id', update)
 
 /**
  * @api {delete} /views/:id Delete view
@@ -68,7 +72,6 @@ router.post('/:id',
  * @apiSuccess (Success 204) 204 No Content.
  * @apiError 404 View not found.
  */
-router.delete('/:id',
-  destroy)
+router.delete('/:id', destroy)
 
 export default router

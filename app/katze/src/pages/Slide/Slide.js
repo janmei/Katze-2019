@@ -1,59 +1,51 @@
 import React, { Component } from 'react';
 import './Slide.css';
-import axios from 'axios';
 import Titelblob from '../../components/Titelblob/Titelblob';
 import UnityScene from '../../components/UnityScene/UnityScene';
-
+const io = require('socket.io-client');
+const socket = io('http://localhost:3001');
 class Slide extends Component {
-  constructor({ match }) {
-    super();
+	constructor({ match }) {
+		super();
 
-    // SET THE SLIDE ID TO GLOBAL STATE
-    this.state = {
-      id: match.params.id,
-      viewData: {}
-    };
-  }
+		// SET THE SLIDE ID TO GLOBAL STATE
+		this.state = {
+			id: match.params.id,
+			viewData: {}
+		};
 
-  componentDidMount() {
-    axios
-      .get('http://localhost:9000/views/' + this.state.id)
-      .then(res => {
-        console.log(res.data);
+		this.updateContent = this.updateContent.bind(this);
 
-        this.setState({
-          viewData: res.data
-        })
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }
+		socket.on(match.params.id, payload => console.log(payload));
+		// socket.on('get_data', payload => this.updateContent(payload));
+	}
 
-  // function to call for socket handling
-  updateContent = () => {
-    axios
-      .get('http://localhost:9000/views/' + this.state.id)
-      .then(res => {
-        console.log(res.data);
+	componentDidMount() {
+		socket.emit('initial_data', this.state.id);
+	}
 
-        this.setState({
-          viewData: res.data
-        })
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }
+	componentWillUnmount() {
+		// socket.off('get_data');
+	}
 
-  render() {
-    return (
-      <div className="Slide">
-        <Titelblob data={this.state.viewData} />
-        <UnityScene />
-      </div>
-    );
-  }
+	// function to call for socket handling
+	updateContent(payload) {
+		console.log('payload');
+
+		this.setState({
+			viewData: payload
+		});
+	}
+
+	render() {
+		socket.on('get_data', this.updateContent);
+		return (
+			<div className="Slide">
+				<Titelblob data={this.state.viewData} />
+				<UnityScene />
+			</div>
+		);
+	}
 }
 
 export default Slide;
