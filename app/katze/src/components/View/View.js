@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './View.css';
-import { Card } from '@material-ui/core';
+import { Card, Box } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -36,11 +36,16 @@ class View extends Component {
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<Checkbox
-						checked={this.state.checked}
-						onChange={this.handleChange('checked')}
-						value="checked"
-					/>
+					<Box className="bottom">
+						<Checkbox
+							checked={this.state.checked}
+							onChange={this.handleChange('checked')}
+							value="checked"
+						/>
+						<Typography variant="subtitle1" component="p" align="right">
+							{this.props.animation}
+						</Typography>
+					</Box>
 				</CardActions>
 			</Card>
 		);

@@ -66,6 +66,7 @@ class Views extends Component {
 						name={item.name}
 						id={item.id}
 						onChange={this.handleSelectedViews}
+						animation={item.animation}
 					/>
 				);
 			});
@@ -112,7 +113,7 @@ class Views extends Component {
 	render() {
 		return (
 			<div>
-				<Box display="flex">
+				<Box display="flex" width="calc(100% - 400px)" flexWrap="wrap">
 					{this.renderViews()}
 
 					<Box

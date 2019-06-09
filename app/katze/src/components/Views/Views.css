@@ -1,7 +1,9 @@
 .addView {
-  border: 2px solid #444;
-  border-radius: 4px;
-  margin: 16px;
-  max-width: 275px;
-  width: 100%;
+	border: 2px solid #444;
+	border-radius: 4px;
+	margin: 16px;
+	max-width: 275px;
+	width: 100%;
+	min-height: 174px;
+	height: 100%;
 }

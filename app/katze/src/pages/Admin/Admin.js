@@ -130,7 +130,7 @@ class Admin extends Component {
     var team = qs.stringify({
       content: {
         countdown: this.state.countdown,
-        head: this.state.content.head,
+        head: (this.state.content.head),
         sub: this.state.content.sub,
         countdown_active: this.state.countdown_active,
       },
@@ -147,7 +147,6 @@ class Admin extends Component {
     for (var view of this.state.selectedViews) {
       axios.post('http://localhost:9000/views/' + view, team, config)
         .then(res => {
-          console.log(res.data.id);
           this.updateViews();
 
           updateData(res.data.id)

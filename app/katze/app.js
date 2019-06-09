@@ -32,8 +32,6 @@ io.on('connection', socket => {
 	});
 
 	socket.on('update_data', data => {
-		console.log(data);
-
 		axios
 			.get('http://localhost:9000/views/' + data)
 			.then(res => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Titelblob.css';
-import Countdown, { calcTimeDelta } from 'react-countdown-now';
+import Countdown from 'react-countdown-now';
 
 const renderer = ({ hours, minutes, seconds, completed }) => {
 	return (
@@ -45,7 +45,7 @@ class Titelblob extends Component {
 	checkTime(delta) {
 		// console.log(delta);
 		// check if remaining time is 10 sendonds
-		if (delta.total == 10000) {
+		if (delta.total === 10000) {
 			//trigger something
 		}
 	}
