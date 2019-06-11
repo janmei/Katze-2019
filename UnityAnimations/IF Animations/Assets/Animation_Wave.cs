@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Animation_Wave : _Animation
 {
+
+    public float spinningSpeed = 1f;
+    public float waveSpeed = 1f;
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -16,10 +20,22 @@ public class Animation_Wave : _Animation
     {
         if (isRunning)
         {
-            foreach(GameObject item in grid)
-            {
-                item.transform.Rotate(1f, 0, 0);
-            }
+            StartCoroutine("Wave");
         }
+    }
+
+    IEnumerator Wave()
+    {
+        foreach (GameObject item in grid)
+        {
+            if (item.transform.eulerAngles.y <= 90)
+            {
+                item.transform.Rotate(0f, spinningSpeed, 0);
+                yield return new WaitForSeconds(waveSpeed);
+            } else
+            {
+                yield return new WaitForSeconds(waveSpeed);
+            }
+        }        
     }
 }

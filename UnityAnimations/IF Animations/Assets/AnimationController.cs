@@ -8,7 +8,7 @@ public class AnimationController : MonoBehaviour
     // Store all the animation scripts in list
     public List<_Animation> animations = new List<_Animation>();
 
-    private int currentAnimation = 0;
+    public int currentAnimation = 0;
     public bool autoStart = true;
     public bool running = false;
 
@@ -35,6 +35,10 @@ public class AnimationController : MonoBehaviour
         {
             animations[currentAnimation].Render();
         }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)){
+            NextAnimation();
+        }
     }
 
     //
@@ -44,7 +48,8 @@ public class AnimationController : MonoBehaviour
     // Set animation to another one
     public void SetAnimation(int to)
     {
-        StopAnimation(currentAnimation);
+        Debug.Log(to);
+        StopAnimation(currentAnimation - 1);
         // TODO: insert delay or wait until animation has stopped
         StartAnimation(to);
     }
@@ -54,7 +59,7 @@ public class AnimationController : MonoBehaviour
     {
         if(currentAnimation < animations.Count - 1)
         {
-            SetAnimation(currentAnimation++);
+            SetAnimation(currentAnimation+1);
         } else
         {
             SetAnimation(0);
@@ -77,6 +82,8 @@ public class AnimationController : MonoBehaviour
     // Starts a specific animation
     private void StartAnimation(int index)
     {
+        Debug.Log("Start Index: " + index);
+        currentAnimation = index;
         animations[index].Run();
         running = true;
     }

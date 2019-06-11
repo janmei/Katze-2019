@@ -326,7 +326,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852898622}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
@@ -673,6 +673,8 @@ MonoBehaviour:
   gridGenerator: {fileID: 1444029124}
   grid: []
   isRunning: 0
+  spinningSpeed: 1
+  waveSpeed: 0.01
 --- !u!114 &1444029128
 MonoBehaviour:
   m_ObjectHideFlags: 0

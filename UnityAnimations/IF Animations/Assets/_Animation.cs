@@ -29,7 +29,8 @@ public class _Animation : MonoBehaviour
     // Stop function for the animation
     public void Stop()
     {
-
+        isRunning = false;
+        Debug.Log("Stop function _Animation - " + isRunning);
     }
 
 }
