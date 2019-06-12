@@ -1,39 +1,46 @@
 import mongoose, { Schema } from 'mongoose'
 
-const teamSchema = new Schema({
-  persons: [{
-    type: String
-  }],
-  abstract: {
-    type: String
+const teamSchema = new Schema(
+  {
+    persons: [
+      {
+        type: String
+      }
+    ],
+    abstract: {
+      type: String
+    },
+    longform: {
+      type: String
+    },
+    hashtags: {
+      type: String
+    },
+    name: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String
+    },
+    semester: {
+      type: Number,
+      required: true
+    }
   },
-  longform: {
-    type: String,
-  },
-  hashtags: {
-    type: String,
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  image: {
-    type: String
-  },
-  semester: {
-    type: Number,
-    required: true
-  }
-}, {
+  {
     timestamps: true,
     toJSON: {
       virtuals: true,
-      transform: (obj, ret) => { delete ret._id }
+      transform: (obj, ret) => {
+        delete ret._id
+      }
     }
-  })
+  }
+)
 
 teamSchema.methods = {
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,
@@ -48,10 +55,12 @@ teamSchema.methods = {
       updatedAt: this.updatedAt
     }
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
+    return full
+      ? {
+        ...view
+        // add properties for a full view
+      }
+      : view
   }
 }
 

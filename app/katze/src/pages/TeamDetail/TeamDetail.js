@@ -53,7 +53,7 @@ class TeamDetail extends Component {
 				persons: this.state.persons,
 				abstract: this.state.abstract,
 				longform: this.state.longform,
-				hashtags: '#ifexhibition #imd #whatif ' + this.state.hashtags
+				hashtags: this.state.hashtags
 			},
 			{ arrayFormat: 'repeat' }
 		);
