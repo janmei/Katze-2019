@@ -21,7 +21,9 @@ class TeamDetail extends Component {
 			abstract: '',
 			persons: [],
 			semester: null,
-			hidden: false
+			hidden: false,
+			longform: '',
+			hashtags: ''
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 	}
@@ -34,7 +36,9 @@ class TeamDetail extends Component {
 					name: res.data.name,
 					persons: res.data.persons,
 					abstract: res.data.abstract,
-					semester: res.data.semester
+					semester: res.data.semester,
+					longform: res.data.longform,
+					hashtags: res.data.hashtags
 				});
 			})
 			.catch(function(err) {
@@ -47,7 +51,9 @@ class TeamDetail extends Component {
 			{
 				name: this.state.name,
 				persons: this.state.persons,
-				abstract: this.state.abstract
+				abstract: this.state.abstract,
+				longform: this.state.longform,
+				hashtags: '#ifexhibition #imd #whatif ' + this.state.hashtags
 			},
 			{ arrayFormat: 'repeat' }
 		);
@@ -189,7 +195,7 @@ class TeamDetail extends Component {
 						<TextField
 							id="filled-name"
 							multiline
-							label="Beschreibung"
+							label="Kurzbeschreibung (max. 160 Buchstaben)"
 							name="abstract"
 							value={this.state.abstract}
 							onChange={this.handleInputChange}
@@ -197,6 +203,30 @@ class TeamDetail extends Component {
 							variant="outlined"
 							fullWidth
 						/>
+						<TextField
+							id="filled-name"
+							multiline
+							label="Detailbeschreibung"
+							name="longform"
+							value={this.state.longform}
+							onChange={this.handleInputChange}
+							margin="normal"
+							variant="outlined"
+							fullWidth
+						/>
+						<TextField
+							id="filled-name"
+							multiline
+							label="Hashtags"
+							helperText="Jedes Wort mit # beginnen und durch Leerzeichen trennen"
+							name="hashtags"
+							value={this.state.hashtags}
+							onChange={this.handleInputChange}
+							margin="normal"
+							variant="outlined"
+							fullWidth
+						/>
+
 						<p>Mitglieder</p>
 						<FormControl fullWidth>{this.renderNames()}</FormControl>
 						<div className="margin-bot">
