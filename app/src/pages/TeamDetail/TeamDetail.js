@@ -9,242 +9,243 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
+import { Typography } from '@material-ui/core';
 
 class TeamDetail extends Component {
-	constructor({ match }) {
-		super();
+  constructor({ match }) {
+    super();
 
-		// SET THE SLIDE ID TO GLOBAL STATE
-		this.state = {
-			id: match.params.id,
-			name: '',
-			abstract: '',
-			persons: [],
-			semester: null,
-			hidden: false,
-			longform: '',
-			hashtags: ''
-		};
-		this.handleInputChange = this.handleInputChange.bind(this);
-	}
+    // SET THE SLIDE ID TO GLOBAL STATE
+    this.state = {
+      id: match.params.id,
+      name: '',
+      abstract: '',
+      persons: [],
+      semester: null,
+      hidden: false,
+      longform: '',
+      hashtags: ''
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-	componentDidMount() {
-		axios
-			.get('/teams/' + this.state.id)
-			.then(res => {
-				this.setState({
-					name: res.data.name,
-					persons: res.data.persons,
-					abstract: res.data.abstract,
-					semester: res.data.semester,
-					longform: res.data.longform,
-					hashtags: res.data.hashtags
-				});
-			})
-			.catch(function(err) {
-				console.log(err);
-			});
-	}
+  componentDidMount() {
+    axios
+      .get('/api/teams/' + this.state.id)
+      .then(res => {
+        this.setState({
+          name: res.data.name,
+          persons: res.data.persons,
+          abstract: res.data.abstract,
+          semester: res.data.semester,
+          longform: res.data.longform,
+          hashtags: res.data.hashtags
+        });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  }
 
-	handleSubmit = e => {
-		const team = qs.stringify(
-			{
-				name: this.state.name,
-				persons: this.state.persons,
-				abstract: this.state.abstract,
-				longform: this.state.longform,
-				hashtags: this.state.hashtags
-			},
-			{ arrayFormat: 'repeat' }
-		);
-		const config = {
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			}
-		};
+  handleSubmit = e => {
+    const team = qs.stringify(
+      {
+        name: this.state.name,
+        persons: this.state.persons,
+        abstract: this.state.abstract,
+        longform: this.state.longform,
+        hashtags: this.state.hashtags
+      },
+      { arrayFormat: 'repeat' }
+    );
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    };
 
-		axios.post('/teams/' + this.state.id, team, config).then(res => {
-			console.log(res);
-			console.log(res.data);
-		});
+    axios.post('/api/teams/' + this.state.id, team, config).then(res => {
+      console.log(res);
+      console.log(res.data);
+    });
 
-		e.preventDefault();
-	};
+    e.preventDefault();
+  };
 
-	handleInputChange(event) {
-		const target = event.target;
-		const value = target.type === 'checkbox' ? target.checked : target.value;
-		const name = target.name;
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
 
-		this.setState({
-			[name]: value
-		});
+    this.setState({
+      [name]: value
+    });
 
-		if (this.state.persons[0] === '') {
-			this.setState({
-				hidden: false
-			});
-		}
-	}
+    if (this.state.persons[0] === '') {
+      this.setState({
+        hidden: false
+      });
+    }
+  }
 
-	handleEmailListChange(index, event) {
-		var persons = this.state.persons.slice(); // Make a copy of the persons first.
-		persons[index] = event.target.value; // Update it with the modified email.
-		this.setState({ persons: persons }); // Update the state.
-	}
+  handleEmailListChange(index, event) {
+    var persons = this.state.persons.slice(); // Make a copy of the persons first.
+    persons[index] = event.target.value; // Update it with the modified email.
+    this.setState({ persons: persons }); // Update the state.
+  }
 
-	renderNames() {
-		if (this.state.persons != null) {
-			return this.state.persons.map((item, i) => {
-				return (
-					<TextField
-						id="filled-name"
-						label="Name"
-						name="person"
-						key={i}
-						value={item}
-						onChange={this.handleEmailListChange.bind(this, i)}
-						margin="normal"
-						variant="outlined"
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									{!this.state.hidden && (
-										<IconButton
-											aria-label="Löschen"
-											onClick={this.removePeople.bind(this, i)}
-										>
-											<Clear />
-										</IconButton>
-									)}
-								</InputAdornment>
-							)
-						}}
-					/>
-				);
-			});
-		} else {
-			return;
-		}
-	}
+  renderNames() {
+    if (this.state.persons != null) {
+      return this.state.persons.map((item, i) => {
+        return (
+          <TextField
+            id="filled-name"
+            label="Name"
+            name="person"
+            key={i}
+            value={item}
+            onChange={this.handleEmailListChange.bind(this, i)}
+            margin="normal"
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  {!this.state.hidden && (
+                    <IconButton
+                      aria-label="Löschen"
+                      onClick={this.removePeople.bind(this, i)}
+                    >
+                      <Clear />
+                    </IconButton>
+                  )}
+                </InputAdornment>
+              )
+            }}
+          />
+        );
+      });
+    } else {
+      return;
+    }
+  }
 
-	addMember = e => {
-		e.preventDefault();
-		this.setState(prevState => ({
-			persons: [...prevState.persons, '']
-		}));
+  addMember = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      persons: [...prevState.persons, '']
+    }));
 
-		if (this.state.persons.length > 0) {
-			this.setState({
-				hidden: false
-			});
-		}
-	};
+    if (this.state.persons.length > 0) {
+      this.setState({
+        hidden: false
+      });
+    }
+  };
 
-	toggleHidden() {
-		const hidden = this.state.hidden;
-		if (this.state.persons.length < 2) {
-			this.setState({
-				hidden: !hidden
-			});
-		}
-		console.log(hidden, this.state.persons);
-	}
+  toggleHidden() {
+    const hidden = this.state.hidden;
+    if (this.state.persons.length < 2) {
+      this.setState({
+        hidden: !hidden
+      });
+    }
+    console.log(hidden, this.state.persons);
+  }
 
-	removePeople = index => {
-		// index.preventDefault()
-		this.setState({
-			persons: this.state.persons.filter((x, i) => i !== index)
-		});
-		if (this.state.persons.length === 1) {
-			this.setState({
-				persons: ['']
-			});
+  removePeople = index => {
+    // index.preventDefault()
+    this.setState({
+      persons: this.state.persons.filter((x, i) => i !== index)
+    });
+    if (this.state.persons.length === 1) {
+      this.setState({
+        persons: ['']
+      });
 
-			this.setState({
-				hidden: true
-			});
-		}
-	};
+      this.setState({
+        hidden: true
+      });
+    }
+  };
 
-	render() {
-		return (
-			<div className="doc">
-				<h3>
-					{this.state.semester}. Semester – {this.state.name}
-				</h3>
-				<form onSubmit={this.handleSubmit}>
-					<Grid
-						container
-						direction="column"
-						justify="flex-start"
-						alignItems="flex-start"
-					>
-						<TextField
-							id="filled-name"
-							label="Name"
-							name="name"
-							value={this.state.name}
-							onChange={this.handleInputChange}
-							margin="normal"
-							variant="outlined"
-							fullWidth
-						/>
-						<TextField
-							id="filled-name"
-							multiline
-							label="Kurzbeschreibung (max. 160 Buchstaben)"
-							name="abstract"
-							value={this.state.abstract}
-							onChange={this.handleInputChange}
-							margin="normal"
-							variant="outlined"
-							fullWidth
-						/>
-						<TextField
-							id="filled-name"
-							multiline
-							label="Detailbeschreibung"
-							name="longform"
-							value={this.state.longform}
-							onChange={this.handleInputChange}
-							margin="normal"
-							variant="outlined"
-							fullWidth
-						/>
-						<TextField
-							id="filled-name"
-							multiline
-							label="Hashtags"
-							helperText="Jedes Wort mit # beginnen und durch Leerzeichen trennen"
-							name="hashtags"
-							value={this.state.hashtags}
-							onChange={this.handleInputChange}
-							margin="normal"
-							variant="outlined"
-							fullWidth
-						/>
+  render() {
+    return (
+      <div className="doc">
+        <h3>
+          {this.state.semester}. Semester – {this.state.name}
+        </h3>
+        <form onSubmit={this.handleSubmit}>
+          <Grid
+            container
+            direction="column"
+            justify="flex-start"
+            alignItems="flex-start"
+          >
+            <TextField
+              id="filled-name"
+              label="Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleInputChange}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              id="filled-name"
+              multiline
+              label="Kurzbeschreibung (max. 160 Buchstaben)"
+              name="abstract"
+              value={this.state.abstract}
+              onChange={this.handleInputChange}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              id="filled-name"
+              multiline
+              label="Detailbeschreibung"
+              name="longform"
+              value={this.state.longform}
+              onChange={this.handleInputChange}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
+            <TextField
+              id="filled-name"
+              multiline
+              label="Hashtags"
+              helperText="Jedes Wort mit # beginnen und durch Leerzeichen trennen"
+              name="hashtags"
+              value={this.state.hashtags}
+              onChange={this.handleInputChange}
+              margin="normal"
+              variant="outlined"
+              fullWidth
+            />
 
-						<p>Mitglieder</p>
-						<FormControl fullWidth>{this.renderNames()}</FormControl>
-						<div className="margin-bot">
-							<Button variant="outlined" onClick={this.addMember}>
-								Mitglied hinzufügen
-							</Button>
-						</div>
-						<Button
-							id="outlined-button-file"
-							color="primary"
-							variant="contained"
-							type="submit"
-						>
-							Senden
-						</Button>
-					</Grid>
-				</form>
-			</div>
-		);
-	}
+            <p>Mitglieder</p>
+            <FormControl fullWidth>{this.renderNames()}</FormControl>
+            <div className="margin-bot">
+              <Button variant="outlined" onClick={this.addMember}>
+                Mitglied hinzufügen
+              </Button>
+            </div>
+            <Button
+              id="outlined-button-file"
+              color="primary"
+              variant="contained"
+              type="submit"
+            >
+              Senden
+            </Button>
+          </Grid>
+        </form>
+      </div>
+    );
+  }
 }
 
 export default TeamDetail;

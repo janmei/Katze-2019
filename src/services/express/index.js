@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import { errorHandler as queryErrorHandler } from 'querymen'
 import { errorHandler as bodyErrorHandler } from 'bodymen'
 import { env } from '../../config'
+import { runInNewContext } from 'vm'
 const path = require('path')
 
 export default (apiRoot, routes) => {
@@ -24,9 +25,13 @@ export default (apiRoot, routes) => {
   app.use(queryErrorHandler())
   app.use(bodyErrorHandler())
 
-  // ... other app.use middleware
-  app.use(express.static(path.join(__dirname, 'app', 'build')))
-  // ...
+  if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('app/build'))
+    //
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(appRoot, '/app/build', 'index.html'))
+    })
+  }
 
   return app
 }
