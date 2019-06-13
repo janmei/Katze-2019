@@ -1,8 +1,10 @@
 import http from 'http'
-import { env, mongo, port, ip, apiRoot } from './config'
-import mongoose from './services/mongoose'
-import express from './services/express'
-import api from './api'
+import { env, mongo, port, ip, apiRoot } from './src/config'
+import mongoose from './src/services/mongoose'
+import express from './src/services/express'
+import api from './src/api'
+const path = require('path')
+global.appRoot = path.resolve(__dirname)
 
 const app = express(apiRoot, api)
 const server = http.createServer(app)

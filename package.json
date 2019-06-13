@@ -2,15 +2,15 @@
   "name": "katze",
   "version": "1.0.0",
   "private": true,
-  "main": "src",
+  "main": "",
   "scripts": {
     "start": "npm run prod",
     "heroku-postbuild": "cd app && npm install --only=dev && npm install && npm run build",
     "test": "jest",
     "coverage": "npm test -- --coverage",
     "postcoverage": "opn coverage/lcov-report/index.html",
-    "dev": "nodemon -i \"*.test.js\" .",
-    "prod": "cross-env NODE_ENV=production nodemon -i \"*.test.js\" -r dotenv-safe/config .",
+    "dev": "nodemon -i \"*.test.js\" src/index",
+    "prod": "cross-env NODE_ENV=production nodemon -i \"*.test.js\" -r dotenv-safe/config src/index.js",
     "lint": "eslint src",
     "docs": "apidoc -i src -o docs && apidoc-markdown -p docs -o DOCS.md",
     "postdocs": "opn docs/index.html"

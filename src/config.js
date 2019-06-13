@@ -3,7 +3,7 @@ import path from 'path'
 import merge from 'lodash/merge'
 
 /* istanbul ignore next */
-const requireProcessEnv = (name) => {
+const requireProcessEnv = name => {
   if (!process.env[name]) {
     throw new Error('You must set the ' + name + ' environment variable')
   }
@@ -35,10 +35,11 @@ const config = {
       }
     }
   },
-  test: { },
+  test: {},
   development: {
     mongo: {
-      uri: 'mongodb+srv://panel:rG5G6TzXR&77kM25j@Taso@cluster0-co2xp.mongodb.net/katze-dev?retryWrites=true',
+      uri:
+        'mongodb+srv://panel:rG5G6TzXR&77kM25j@Taso@cluster0-co2xp.mongodb.net/katze-dev?retryWrites=true',
       options: {
         debug: true
       }
@@ -48,7 +49,9 @@ const config = {
     ip: process.env.IP || undefined,
     port: process.env.PORT || 8080,
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/katze'
+      uri:
+        process.env.MONGODB_URI ||
+        'mongodb+srv://panel:rG5G6TzXR&77kM25j@Taso@cluster0-co2xp.mongodb.net/katze-dev?retryWrites=true'
     }
   }
 }
