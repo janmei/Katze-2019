@@ -12,14 +12,13 @@ const server = http.createServer(app)
 mongoose.connect(mongo.uri, { useNewUrlParser: true })
 mongoose.Promise = Promise
 
-// ...
 // Right before your app.listen(), add this:
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'app', 'build', 'index.html'))
+app.get('/projects', (req, res) => {
+  res.sendFile(path.join(__dirname, 'app/build/index.html'))
 })
 
 setImmediate(() => {
-  server.listen(port, ip, () => {
+  app.listen(port, () => {
     console.log(
       'Express server listening on http://%s:%d, in %s mode',
       ip,

@@ -26,6 +26,7 @@ export default (apiRoot, routes) => {
 
   // ... other app.use middleware
   app.use(express.static(path.join(__dirname, 'app', 'build')))
+  // ...
 
   return app
 }

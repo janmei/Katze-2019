@@ -2,7 +2,7 @@
   "name": "katze",
   "version": "1.0.0",
   "private": true,
-  "main": "",
+  "main": "app.js",
   "scripts": {
     "start": "npm run prod",
     "heroku-postbuild": "cd app && npm install --only=dev && npm install && npm run build",
