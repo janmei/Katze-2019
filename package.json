@@ -5,7 +5,7 @@
   "main": "src",
   "scripts": {
     "start": "npm run prod",
-    "heroku-postbuild": "cd ../client && npm install --only=dev && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "test": "jest",
     "coverage": "npm test -- --coverage",
     "postcoverage": "opn coverage/lcov-report/index.html",
