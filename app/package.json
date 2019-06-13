@@ -1,0 +1,42 @@
+{
+  "name": "katze",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.0.0",
+    "@material-ui/icons": "^3.0.2",
+    "axios": "^0.18.0",
+    "final-form": "^4.12.0",
+    "final-form-arrays": "^1.1.2",
+    "moment": "^2.24.0",
+    "qs": "^6.7.0",
+    "react": "^16.8.6",
+    "react-countdown-now": "^2.1.0",
+    "react-dom": "^16.8.6",
+    "react-final-form": "^4.1.0",
+    "react-final-form-arrays": "^2.0.3",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-unity-webgl": "^7.1.1",
+    "request": "^2.88.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:8080",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
