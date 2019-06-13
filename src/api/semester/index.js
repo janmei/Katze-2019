@@ -59,7 +59,7 @@ router.get('/:year',
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 404 Semester not found.
  */
-router.post('/:id',
+router.put('/:id',
   update)
 
 /**

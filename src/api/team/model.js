@@ -16,9 +16,11 @@ const teamSchema = new Schema(
     hashtags: {
       type: String
     },
+    contact: {
+      type: String
+    },
     name: {
-      type: String,
-      required: true
+      type: String
     },
     image: {
       type: String
@@ -48,6 +50,7 @@ teamSchema.methods = {
       semester: this.semester,
       longform: this.longform,
       hashtags: this.hashtags,
+      contact: this.contact,
       abstract: this.abstract,
       persons: this.persons,
       image: this.image,
