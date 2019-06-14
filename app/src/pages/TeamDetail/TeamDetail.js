@@ -240,6 +240,7 @@ class TeamDetail extends Component {
               id="filled-name"
               multiline
               label="Kurzbeschreibung (max. 160 Buchstaben)"
+              helperText="Projektbeschreibung für Instagram"
               name="abstract"
               value={this.state.abstract}
               onChange={this.handleInputChange}
@@ -251,6 +252,7 @@ class TeamDetail extends Component {
               id="filled-name"
               multiline
               label="Detailbeschreibung"
+              helperText="Erklärung des Projekts für das Programmheft (max. 2 Absätze)"
               name="longform"
               value={this.state.longform}
               onChange={this.handleInputChange}
