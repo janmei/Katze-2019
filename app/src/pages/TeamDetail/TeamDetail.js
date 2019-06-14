@@ -239,7 +239,7 @@ class TeamDetail extends Component {
             <TextField
               id="filled-name"
               multiline
-              label="Kurzbeschreibung (noch Buchstaben)"
+              label="Kurzbeschreibung (max. 160 Buchstaben)"
               name="abstract"
               value={this.state.abstract}
               onChange={this.handleInputChange}
