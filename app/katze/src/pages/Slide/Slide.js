@@ -3,6 +3,7 @@ import './Slide.css';
 import Titelblob from '../../components/Titelblob/Titelblob';
 import UnityScene from '../../components/UnityScene/UnityScene';
 import { initalData, getData } from '../../global/socket';
+import Tone from 'tone';
 class Slide extends Component {
 	constructor({ match }) {
 		super();
