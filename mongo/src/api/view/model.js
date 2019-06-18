@@ -10,13 +10,14 @@ const viewSchema = new Schema({
       type: String,
       default: "Welcome to if 2019"
     },
-    countdown: {
-      type: String,
-    },
-    countdown_active: {
-      type: Boolean,
-      default: false,
-    }
+
+  },
+  countdown: {
+    type: String,
+  },
+  countdown_active: {
+    type: Boolean,
+    default: false,
   },
   team_layer: {
     type: mongoose.Schema.Types.ObjectId,

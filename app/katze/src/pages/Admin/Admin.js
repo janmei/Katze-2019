@@ -42,10 +42,10 @@ class Admin extends Component {
       views: [],
       selectedViews: [],
       content: {
-        countdown: Date,
         head: "",
         sub: ""
       },
+      countdown: Date,
       countdown_active: false,
     };
 
@@ -119,18 +119,14 @@ class Admin extends Component {
   };
 
   handleSelectChange = name => event => {
-    if(name =='selectedSemester'){
+    if (name == 'selectedSemester' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
       teams: event.target.value.teams,
     });
-  }   else if(name =='selectedTeam'){
+    } else if (name == 'selectedTeam' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
-      content: {
-        head: event.target.value.name,
-        sub: event.target.value.persons.join(', ')
-      }
     });
   }
   };
@@ -140,11 +136,11 @@ class Admin extends Component {
 
     var team = qs.stringify({
       content: {
-        countdown: this.state.countdown,
         head: this.state.content.head,
         sub: this.state.content.sub,
-        countdown_active: this.state.countdown_active,
       },
+      countdown: this.state.countdown,
+      countdown_active: this.state.countdown_active,
       team_layer: this.state.selectedTeam.id,
       animation: this.state.template
     }, { allowDots: true })
@@ -332,7 +328,7 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                {this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active ? (
+                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active) ? (
                   <Button color="primary" variant="contained" type="submit">
                     Senden
                   </Button>
