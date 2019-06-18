@@ -41,6 +41,7 @@ class View extends Component {
 							checked={this.state.checked}
 							onChange={this.handleChange('checked')}
 							value="checked"
+							color="primary"
 						/>
 						<Typography variant="subtitle1" component="p" align="right">
 							{this.props.animation}

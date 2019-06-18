@@ -36,9 +36,9 @@ class Admin extends Component {
       menu: false,
       template: '',
       semesters: [],
-      selectedSemester: {},
+      selectedSemester: null,
       teams: [],
-      selectedTeam: {},
+      selectedTeam: null,
       views: [],
       selectedViews: [],
       content: {
@@ -332,9 +332,15 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                <Button color="primary" variant="contained" type="submit">
-                  Senden
-            </Button>
+                {this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active ? (
+                  <Button color="primary" variant="contained" type="submit">
+                    Senden
+                  </Button>
+                ) : (
+                    <Button color="primary" variant="contained" type="submit" disabled>
+                      Senden
+                    </Button>
+                )} 
               </Box>
             </div>
           </Drawer>
