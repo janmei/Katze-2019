@@ -1,44 +1,49 @@
 import mongoose, { Schema } from 'mongoose'
 
-const viewSchema = new Schema({
-  content: {
-    head: {
-      type: String,
-      default: "Hello World"
+const viewSchema = new Schema(
+  {
+    content: {
+      head: {
+        type: String,
+        default: 'Hello World'
+      },
+      sub: {
+        type: String,
+        default: 'Welcome to if 2019'
+      }
     },
-    sub: {
-      type: String,
-      default: "Welcome to if 2019"
+    countdown: {
+      type: String
     },
-
+    countdown_active: {
+      type: Boolean,
+      default: false
+    },
+    team_layer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Team'
+    },
+    animation: {
+      type: String,
+      default: 'text'
+    },
+    name: {
+      type: String
+    }
   },
-  countdown: {
-    type: String,
-  },
-  countdown_active: {
-    type: Boolean,
-    default: false,
-  },
-  team_layer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Team'
-  },
-  animation: {
-    type: String
-  },
-  name: {
-    type: String
-  }
-}, {
+  {
     timestamps: true,
     toJSON: {
       virtuals: true,
-      transform: (obj, ret) => { delete ret._id }
+      transform: (obj, ret) => {
+        delete ret._id
+      }
     }
-  })
+  }
+)
 
 viewSchema.methods = {
-  view(full) {
+  view (full) {
     const view = {
       // simple view
       id: this.id,
@@ -50,10 +55,12 @@ viewSchema.methods = {
       updatedAt: this.updatedAt
     }
 
-    return full ? {
-      ...view
-      // add properties for a full view
-    } : view
+    return full
+      ? {
+        ...view
+        // add properties for a full view
+      }
+      : view
   }
 }
 
