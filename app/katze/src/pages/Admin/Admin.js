@@ -119,18 +119,29 @@ class Admin extends Component {
   };
 
   handleSelectChange = name => event => {
+    if(name =='selectedSemester'){
     this.setState({
       [name]: event.target.value,
       teams: event.target.value.teams,
     });
+  }   else if(name =='selectedTeam'){
+    this.setState({
+      [name]: event.target.value,
+      content: {
+        head: event.target.value.name,
+        sub: event.target.value.persons.join(', ')
+      }
+    });
+  }
   };
+
 
   handleSubmit = e => {
 
     var team = qs.stringify({
       content: {
         countdown: this.state.countdown,
-        head: (this.state.content.head),
+        head: this.state.content.head,
         sub: this.state.content.sub,
         countdown_active: this.state.countdown_active,
       },
@@ -260,7 +271,7 @@ class Admin extends Component {
                       <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
                       <Select
                         value={this.state.selectedTeam || 'none'}
-                        onChange={this.handleChange('selectedTeam')}
+                        onChange={this.handleSelectChange('selectedTeam')}
                         input={
                           <OutlinedInput name="teams" labelWidth={52} id="outlined-age-simple" />
                         }
