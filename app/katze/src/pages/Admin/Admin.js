@@ -36,16 +36,16 @@ class Admin extends Component {
       menu: false,
       template: '',
       semesters: [],
-      selectedSemester: {},
+      selectedSemester: null,
       teams: [],
-      selectedTeam: {},
+      selectedTeam: null,
       views: [],
       selectedViews: [],
       content: {
-        countdown: Date,
         head: "",
         sub: ""
       },
+      countdown: Date,
       countdown_active: false,
     };
 
@@ -119,21 +119,28 @@ class Admin extends Component {
   };
 
   handleSelectChange = name => event => {
+    if (name == 'selectedSemester' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
       teams: event.target.value.teams,
     });
+    } else if (name == 'selectedTeam' && event.target.value != 'none'){
+    this.setState({
+      [name]: event.target.value,
+    });
+  }
   };
+
 
   handleSubmit = e => {
 
     var team = qs.stringify({
       content: {
-        countdown: this.state.countdown,
-        head: (this.state.content.head),
+        head: this.state.content.head,
         sub: this.state.content.sub,
-        countdown_active: this.state.countdown_active,
       },
+      countdown: this.state.countdown,
+      countdown_active: this.state.countdown_active,
       team_layer: this.state.selectedTeam.id,
       animation: this.state.template
     }, { allowDots: true })
@@ -260,7 +267,7 @@ class Admin extends Component {
                       <InputLabel htmlFor="outlined-age-simple">Gruppe</InputLabel>
                       <Select
                         value={this.state.selectedTeam || 'none'}
-                        onChange={this.handleChange('selectedTeam')}
+                        onChange={this.handleSelectChange('selectedTeam')}
                         input={
                           <OutlinedInput name="teams" labelWidth={52} id="outlined-age-simple" />
                         }
@@ -321,9 +328,15 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                <Button color="primary" variant="contained" type="submit">
-                  Senden
-            </Button>
+                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active) ? (
+                  <Button color="primary" variant="contained" type="submit">
+                    Senden
+                  </Button>
+                ) : (
+                    <Button color="primary" variant="contained" type="submit" disabled>
+                      Senden
+                    </Button>
+                )} 
               </Box>
             </div>
           </Drawer>

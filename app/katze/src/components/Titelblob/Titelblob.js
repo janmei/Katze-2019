@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './Titelblob.css';
 import Countdown from 'react-countdown-now';
 
@@ -17,10 +17,10 @@ class Titelblob extends Component {
 		this.state = {
 			content: {
 				head: '',
-				sub: '',
-				countdown: '',
-				countdown_active: false
+				sub: ''
 			},
+			countdown: '',
+			countdown_active: false,
 			animation: '',
 			team_layer: {}
 		};
@@ -60,12 +60,24 @@ class Titelblob extends Component {
 						renderer={renderer}
 					/>
                 )}
+                
                 <div class="WelcomeLayer">
-                    <div class="TextLayer">
-                        <h1>{this.state.content.head}15:00</h1>
-                        <h6>{this.state.content.sub}Pause</h6>
-                    </div>
 
+				{/* CUSTOM TEXT */}
+				{this.state.animation === 'text' && (
+                                    <div class="TextLayer">
+                                    <h1>{this.state.content.head}15:00</h1>
+                                    <h6>{this.state.content.sub}Pause</h6>
+                                </div>
+				)}
+				{/* TEAM  */}
+				{this.state.animation === 'teams' && (
+                                    <div class="TextLayer">
+                                    <h1>{this.state.team_layer.name}15:00</h1>
+                                    <h6>{this.state.team_layer.persons.join(', ')}Pause</h6>
+                                </div>  
+
+				)}
                     <svg id="blob" 
                         viewBox="394 220 1675 1638"
                         fill="none"

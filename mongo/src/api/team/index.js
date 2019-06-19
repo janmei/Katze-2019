@@ -6,7 +6,7 @@ import { schema } from './model'
 export Team, { schema } from './model'
 
 const router = new Router()
-const { persons, abstract, name, image, semester } = schema.tree
+const { persons, abstract, name, image, semester, longform, hashtags } = schema.tree
 
 /**
  * @api {post} /teams Create team
@@ -21,7 +21,7 @@ const { persons, abstract, name, image, semester } = schema.tree
  * @apiError 404 Team not found.
  */
 router.post('/',
-  body({ persons, abstract, name, image, semester }),
+  body({ persons, abstract, name, image, semester, longform, hashtags }),
   create)
 
 /**
