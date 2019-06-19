@@ -62,8 +62,8 @@ class Titelblob extends Component {
                 )}
                 <div class="WelcomeLayer">
                     <div class="TextLayer">
-                        <h1>{this.state.content.head}Hallo Welt!</h1>
-                        <h6>{this.state.content.sub}Willkommen auf der interactive future 2019!</h6>
+                        <h1>{this.state.content.head}15:00</h1>
+                        <h6>{this.state.content.sub}Pause</h6>
                     </div>
 
                     <svg id="blob" 
