@@ -39,7 +39,7 @@ class Slide extends Component {
 		return (
 			<div className="Slide">
 				<Titelblob data={this.state.viewData} />
-				<UnityScene data={this.state.viewData} onChange={this.updateContent}/>
+				<UnityScene data={this.state.viewData}/>
 			</div>
 		);
 	}
