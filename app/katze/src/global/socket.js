@@ -17,3 +17,7 @@ export const getData = cb => {
 export const updateData = data => {
 	socket.emit('update_data', data);
 };
+
+export const triggerTransition = data => {
+	socket.emit('trigger transition')
+}

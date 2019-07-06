@@ -19,6 +19,10 @@ const viewSchema = new Schema(
       type: Boolean,
       default: false
     },
+    isMain: {
+      default: false,
+      type: Boolean
+    },
     team_layer: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Team'
@@ -51,6 +55,7 @@ viewSchema.methods = {
       team_layer: this.team_layer,
       animation: this.animation,
       name: this.name,
+      isMain: this.isMain,
       countdown: this.countdown,
       countdown_active: this.countdown_active,
       createdAt: this.createdAt,

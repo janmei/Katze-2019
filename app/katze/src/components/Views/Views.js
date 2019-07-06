@@ -26,7 +26,7 @@ class Views extends Component {
 		if (e.checked) {
 			this.setState(
 				state => {
-					const selectedViews = state.selectedViews.concat(e.id);
+					const selectedViews = state.selectedViews.concat(e);
 					return {
 						selectedViews
 					};
@@ -41,7 +41,7 @@ class Views extends Component {
 			this.setState(
 				state => {
 					const selectedViews = state.selectedViews.filter(
-						(item, j) => e.id !== item
+						(item, j) => e.id !== item.id
 					);
 					return {
 						selectedViews

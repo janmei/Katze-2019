@@ -25,6 +25,7 @@ import Views from '../../components/Views/Views';
 import Countdown from '../../components/Countdown/Countdown';
 import { Button, Box } from '@material-ui/core';
 import { updateData } from '../../global/socket';
+import { triggerTransition } from '../../global/socket';
 
 
 class Admin extends Component {
@@ -174,7 +175,7 @@ class Admin extends Component {
     }
 
     for (var view of this.state.selectedViews) {
-      axios.post('http://localhost:9000/views/' + view, query, config)
+      axios.post('http://localhost:9000/views/' + view.id, query, config)
         .then(res => {
           this.updateViews();
 
@@ -206,6 +207,11 @@ class Admin extends Component {
     } else {
       return;
     }
+  }
+
+  triggerTransition = (e) => {
+    triggerTransition()
+    e.preventDefault()
   }
 
   render() {
@@ -361,6 +367,14 @@ class Admin extends Component {
                     </Button>
                 )} 
               </Box>
+
+              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain) && (
+                <div className="bottom">
+                <Button color="primary" variant="contained" onClick={this.triggerTransition}>
+                  Senden
+                  </Button>
+              </div>
+              ) }
             </div>
           </Drawer>
         </form>

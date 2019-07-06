@@ -36,7 +36,7 @@ class View extends Component {
 	handleChange = name => event => {
 		this.setState({ ...this.state, [name]: event.target.checked }, function() {
 			if (typeof this.props.onChange === 'function') {
-				this.props.onChange({ id: this.props.item.id, checked: this.state.checked });
+				this.props.onChange({ ...this.props.item, checked: this.state.checked });
 			}
 		});
 	};
