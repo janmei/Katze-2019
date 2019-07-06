@@ -29,7 +29,7 @@ class Titelblob extends Component {
 			},
 			countdown: '',
 			countdown_active: false,
-			animation: 'sponsors',
+			animation: '',
 			team_layer: {}
         };
 		this.myRef = React.createRef();
@@ -45,15 +45,18 @@ class Titelblob extends Component {
 		this.todayEnd.setSeconds(0)
 	}
     
-    componentDidMount() {
-        var stage = document.getElementById("sponsors");
-        var fadeComplete = function(e) { stage.appendChild(arr[0]); };
-        var arr = stage.getElementsByTagName("div");
+	componentDidUpdate() {
+		if (this.state.animation === 'sponsors') {
+			var stage = document.getElementById("sponsors");
+			var fadeComplete = function (e) { stage.appendChild(arr[0]); };
+			var arr = stage.getElementsByTagName("div");
 
-        for(var i=0; i < arr.length; i++) {
-            arr[i].addEventListener("animationend", fadeComplete, false);
-        }
-    }
+			for (var i = 0; i < arr.length; i++) {
+				arr[i].addEventListener("animationend", fadeComplete, false);
+			}
+		}
+	}
+	
 
 	componentWillReceiveProps(next) {
 		this.setState({
@@ -79,12 +82,6 @@ class Titelblob extends Component {
 		}
 	}
 
-	getModDate = () => {
-		const current = new Date();
-		const newDate = new Date().setHours(current.getHours() + 1);
-		return newDate
-	}
-
 	render() {
 		return (
 			<div className="InfoLayer">
@@ -97,49 +94,49 @@ class Titelblob extends Component {
                 )}
                 
                 <div className="WelcomeLayer">
-
-				{/* CUSTOM TEXT */}
+{/* 
+				{/* CUSTOM TEXT 
 				{this.state.animation === 'text' && (
-                                    <div className="TextLayer">
-                                    <h1>{this.state.content.head}</h1>
-                                    <h6>{this.state.content.sub}</h6>
-                                </div>
-                )}
+					<div className="TextLayer">
+						<h1>{this.state.content.head}</h1>
+						<h6>{this.state.content.sub}</h6>
+					</div>
+                )} */}
                 {/* SPONSORS */}
 				{this.state.animation === 'sponsors' && (
-                                <div class="SponsorsLayer">
-                                    <div id="sponsors" ref="this.myRef">
-                                        <div><img src={require("../../assets/sponsors/3spin.jpg")} /></div>
-                                        <div><img src={require("../../assets/sponsors/Asta_h_da.png")} /></div>
-                                        <div><img src={require("../../assets/sponsors/Designerdock.png")} /></div>
-                                        <div><img src={require("../../assets/sponsors/Honda.png")} /></div>
-                                        <div><img src={require("../../assets/sponsors/Hype.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Merck.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Meso.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Qundg.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Schumacher.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Sparkasse_da.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Voba_Solutions.png" )}/></div>
-                                        <div><img src={require("../../assets/sponsors/Zdf.png" )}/></div>
-                                    </div>
-                                </div>
+					<div class="SponsorsLayer">
+						<div id="sponsors" ref="this.myRef">
+							<div><img src={require("../../assets/sponsors/3spin.jpg")} /></div>
+							<div><img src={require("../../assets/sponsors/Asta_h_da.png")} /></div>
+							<div><img src={require("../../assets/sponsors/Designerdock.png")} /></div>
+							<div><img src={require("../../assets/sponsors/Honda.png")} /></div>
+							<div><img src={require("../../assets/sponsors/Hype.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Merck.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Meso.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Qundg.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Schumacher.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Sparkasse_da.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Voba_Solutions.png" )}/></div>
+							<div><img src={require("../../assets/sponsors/Zdf.png" )}/></div>
+						</div>
+					</div>
 				)}
-				{/* TEAM  */}
+				{/* TEAM 
 				{this.state.animation === 'teams' && (
-                                    <div className="TextLayer">
-                                    <h1>{this.state.team_layer.name}</h1>
-                                    <h6>{this.state.team_layer.persons.join(', ')}</h6>
-                                </div>  
+					<div className="TextLayer">
+						<h1>{this.state.team_layer.name}</h1>
+						<h6>{this.state.team_layer.persons.join(', ')}</h6>
+					</div>  
 
 				)}
-				{/* COUNTDOWN */}
+				{/* COUNTDOWN 
 				{this.state.animation === 'countdown' && (
 					<div class="TextLayer">
 						<h1>{this.state.team_layer.name}</h1>
 						<h6>{this.state.team_layer.persons.join(', ')}</h6>
 					</div>
 
-				)}
+				)} */}
 				{/* TIMETABLE */}
 					{this.state.animation === 'timetable' && (
 						<div className="calendar">
@@ -161,7 +158,7 @@ class Titelblob extends Component {
 							
 				)}
 					
-
+{/* 
 
                     <svg id="blob" 
                         viewBox="394 220 1675 1638"
@@ -179,7 +176,7 @@ class Titelblob extends Component {
                             />
                         </path>
                         </g>
-                    </svg>
+                    </svg> */}
                 </div>
             </div>
 		);
