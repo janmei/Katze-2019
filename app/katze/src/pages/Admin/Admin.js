@@ -101,6 +101,8 @@ class Admin extends Component {
   };
 
   handleArrayChange = name => event => {
+    console.log(name, event);
+    
     this.setState({ [name]: event });
   };
 

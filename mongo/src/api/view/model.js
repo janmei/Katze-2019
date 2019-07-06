@@ -13,7 +13,7 @@ const viewSchema = new Schema(
       }
     },
     countdown: {
-      type: String
+      type: Date
     },
     countdown_active: {
       type: Boolean,
@@ -51,6 +51,8 @@ viewSchema.methods = {
       team_layer: this.team_layer,
       animation: this.animation,
       name: this.name,
+      countdown: this.countdown,
+      countdown_active: this.countdown_active,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt
     }
