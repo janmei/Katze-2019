@@ -1,6 +1,6 @@
 {
 "companyName": "DefaultCompany",
-"productName": "IF Animations",
+"productName": "UnityAnimations3",
 "dataUrl": "TestSceneHD.data.unityweb",
 "wasmCodeUrl": "TestSceneHD.wasm.code.unityweb",
 "wasmFrameworkUrl": "TestSceneHD.wasm.framework.unityweb",

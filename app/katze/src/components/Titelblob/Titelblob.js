@@ -29,10 +29,11 @@ class Titelblob extends Component {
 			},
 			countdown: '',
 			countdown_active: false,
-			animation: 'timetable',
+			animation: 'sponsors',
 			team_layer: {}
-		};
-
+        };
+		this.myRef = React.createRef();
+		
 		this.todayStart = new Date()
 		this.todayStart.setHours(10)
 		this.todayStart.setMinutes(0)
@@ -43,6 +44,16 @@ class Titelblob extends Component {
 		this.todayEnd.setMinutes(0)
 		this.todayEnd.setSeconds(0)
 	}
+    
+    componentDidMount() {
+        var stage = document.getElementById("sponsors");
+        var fadeComplete = function(e) { stage.appendChild(arr[0]); };
+        var arr = stage.getElementsByTagName("div");
+
+        for(var i=0; i < arr.length; i++) {
+            arr[i].addEventListener("animationend", fadeComplete, false);
+        }
+    }
 
 	componentWillReceiveProps(next) {
 		this.setState({
@@ -92,6 +103,25 @@ class Titelblob extends Component {
                                     <div className="TextLayer">
                                     <h1>{this.state.content.head}</h1>
                                     <h6>{this.state.content.sub}</h6>
+                                </div>
+                )}
+                {/* SPONSORS */}
+				{this.state.animation === 'sponsors' && (
+                                <div class="SponsorsLayer">
+                                    <div id="sponsors" ref="this.myRef">
+                                        <div><img src={require("../../assets/sponsors/3spin.jpg")} /></div>
+                                        <div><img src={require("../../assets/sponsors/Asta_h_da.png")} /></div>
+                                        <div><img src={require("../../assets/sponsors/Designerdock.png")} /></div>
+                                        <div><img src={require("../../assets/sponsors/Honda.png")} /></div>
+                                        <div><img src={require("../../assets/sponsors/Hype.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Merck.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Meso.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Qundg.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Schumacher.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Sparkasse_da.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Voba_Solutions.png" )}/></div>
+                                        <div><img src={require("../../assets/sponsors/Zdf.png" )}/></div>
+                                    </div>
                                 </div>
 				)}
 				{/* TEAM  */}
