@@ -257,6 +257,7 @@ class Admin extends Component {
                     <MenuItem value={'text'}>Text</MenuItem>
                     <MenuItem value={'schedule'}>Zeitplan</MenuItem>
                     <MenuItem value={'countdown'}>Countdown</MenuItem>
+                    <MenuItem value={'timetable'}>Zeitplan</MenuItem>
                   </Select>
                 </FormControl>
               </Box>
@@ -350,7 +351,7 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null) ? (
+                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null || this.state.template === 'timetable') ? (
                   <Button color="primary" variant="contained" type="submit">
                     Senden
                   </Button>
