@@ -32,26 +32,49 @@ class UnityScene extends Component {
   componentDidMount() {
     // Listener für Scene Switch
     this.unityContent.on("loaded", () => {
-
       // Now we can for example hide the loading overlay.
-      console.log("loaded");
 
-      if (this.state.animation === 'text') {
-        if (this.state.countdown_active) {
-          this.unityContent.send(
-            'Communicator',
-            'ChangeText',
-            this.state.content.head + '|' + this.state.content.sub + '|' + 'false'
-          )
-        } else {
-          this.unityContent.send(
-            'Communicator',
-            'ChangeText',
-            this.state.content.head + '|' + this.state.content.sub + '|' + this.getDiff(this.state.countdown)
-          )
-        }
-      }
+      this.updateTexts()
     });
+  }
+
+  updateTexts () {
+    if (this.state.animation === 'text') {
+      if (this.state.countdown_active) {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          this.state.content.head + '|' + this.state.content.sub + '|' + 'false'
+        )
+      } else {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          this.state.content.head + '|' + this.state.content.sub + '|' + this.getDiff(this.state.countdown)
+        )
+      }
+    }
+    else if (this.state.animation === 'teams') {
+      if (this.state.countdown_active) {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          this.state.team_layer.name + '|' + this.state.team_layer.persons.join(' • ') + '|' + 'false'
+        )
+      } else {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          this.state.team_layer.name + '|' + this.state.team_layer.persons.join(' • ') + '|' + this.getDiff(this.state.countdown)
+        )
+      }
+    }else if (this.state.animation === 'sponsors' || this.state.animation === 'timetable') {
+      this.unityContent.send(
+        'Communicator',
+        'ChangeText',
+        "||false"
+      )
+    }
   }
 
   componentDidUpdate() {
@@ -59,8 +82,6 @@ class UnityScene extends Component {
     
   }
   componentWillReceiveProps(next) {
-
-    console.log("data");
     
     this.setState({
       content: {
@@ -72,9 +93,8 @@ class UnityScene extends Component {
       animation: next.data.animation,
       team_layer: next.data.team_layer
     });
-    if (this.state.countdown_active) {
-      // setCountdown(this.state.content.countdown);
-    }
+    this.updateTexts()
+
   }
 
   getDiff(time) {
