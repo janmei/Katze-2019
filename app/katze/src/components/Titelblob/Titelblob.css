@@ -58,3 +58,58 @@ svg#blob {
 svg#blob g {
     transform: translate(0px,0px);
 }
+
+/* ///////////////
+SPONSORS
+///////////////// */
+
+.SponsorsLayer {
+    position: absolute;
+    bottom: 6%;
+    left: 6%;
+    z-index: 100;
+}
+
+#sponsors {
+    width: 320px;
+    height: 190px;
+    position: relative;
+}
+
+#sponsors div {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    position: absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index: 11;
+}
+
+#sponsors div img {
+    max-width: 100%;
+    max-height: 100%;   
+}
+
+#sponsors div:nth-of-type(1) {
+    animation-name: fader;
+    animation-delay: 4s;
+    animation-duration: 1.6s;
+    z-index: 30;
+}
+
+#sponsors div:nth-of-type(2) {
+    z-index: 20;
+}
+
+#sponsors div:nth-of-type(n+3) {
+    display: none;
+}
+
+@keyframes fader {
+    from { opacity: 1.0; }
+    to   { opacity: 0.0; }
+}
