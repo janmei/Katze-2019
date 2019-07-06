@@ -72,6 +72,12 @@ class View extends Component {
 					<Typography variant="subtitle1" component="p">
 						{this.props.item.content.sub}
 						</Typography>
+						{this.props.item.countdown_active && (
+							<Countdown
+								date={this.props.item.countdown}
+								renderer={renderer}
+							/>
+						)}
 				</CardContent>
 				)}
 				{this.props.item.animation === 'teams' && (
@@ -83,6 +89,12 @@ class View extends Component {
 						<Typography variant="subtitle1" component="p">
 							{this.props.item.team_layer.persons.join(', ')}
 						</Typography>
+						{this.props.item.countdown_active && (
+							<Countdown
+								date={this.props.item.countdown}
+								renderer={renderer}
+							/>
+						)}
 					</CardContent>
 				)}
 				{this.props.item.animation === 'countdown' && (
@@ -91,10 +103,10 @@ class View extends Component {
 						<Typography variant="h6" component="p">
 							Countdown
 						</Typography>
-							<Countdown 					
-								date={this.props.item.countdown}
-								renderer={renderer}
-							/>
+						<Countdown 					
+							date={this.props.item.countdown}
+							renderer={renderer}
+						/>
 					</CardContent>
 				)}
 				<CardActions>
