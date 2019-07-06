@@ -1,3 +1,6 @@
+
+@import "../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
+
 body {
     /* background: #000000; */
 }
@@ -45,6 +48,17 @@ h6 {
     bottom: 15%;
     left: 4%;
     z-index: 100;
+}
+
+.calendar{
+    width: 400px;
+    position: absolute;
+    bottom: 5%;
+    left: 4%;
+    z-index: 999;
+    overflow: hidden;
+    height: 300px;
+    font-family: 'Righteous', sans-serif
 }
 
 svg#blob {

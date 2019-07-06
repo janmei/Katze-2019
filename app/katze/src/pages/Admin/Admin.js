@@ -105,7 +105,15 @@ class Admin extends Component {
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    if (event.target.value === 'countdown') {
+      this.setState({
+        [name]: event.target.value,
+        countdown_active: true,
+      });
+
+    } else { 
+      this.setState({ [name]: event.target.value });
+    }
   };
 
   handleContentChange = name => event => {
@@ -263,7 +271,7 @@ class Admin extends Component {
                     <FormControl className="menuForm" variant="outlined" fullWidth margin="normal">
                       <InputLabel htmlFor="outlined-age-simple">
                         Semester
-                  </InputLabel>
+                      </InputLabel>
                       <Select
                         value={this.state.selectedSemester || 'none'}
                         onChange={this.handleSelectChange('selectedSemester')}

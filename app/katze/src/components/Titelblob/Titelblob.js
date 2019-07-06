@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import { Calendar, globalizeLocalizer } from 'react-big-calendar'
+import globalize from 'globalize'
+import moment from 'moment'
+import events from './events';
 import './Titelblob.css';
 import Countdown from 'react-countdown-now';
+require('globalize/lib/cultures/globalize.culture.de-DE')
+
 
 const renderer = ({ hours, minutes, seconds, completed }) => {
 	return (
@@ -9,6 +15,8 @@ const renderer = ({ hours, minutes, seconds, completed }) => {
 		</span>
 	);
 };
+
+const localizer = globalizeLocalizer(globalize)
 
 class Titelblob extends Component {
 	constructor(props) {
@@ -24,8 +32,18 @@ class Titelblob extends Component {
 			animation: 'sponsors',
 			team_layer: {}
         };
-        this.myRef = React.createRef();
-    }
+		this.myRef = React.createRef();
+		
+		this.todayStart = new Date()
+		this.todayStart.setHours(10)
+		this.todayStart.setMinutes(0)
+		this.todayStart.setSeconds(0)
+
+		this.todayEnd = new Date()
+		this.todayEnd.setHours(18)
+		this.todayEnd.setMinutes(0)
+		this.todayEnd.setSeconds(0)
+	}
     
     componentDidMount() {
         var stage = document.getElementById("sponsors");
@@ -61,6 +79,12 @@ class Titelblob extends Component {
 		}
 	}
 
+	getModDate = () => {
+		const current = new Date();
+		const newDate = new Date().setHours(current.getHours() + 1);
+		return newDate
+	}
+
 	render() {
 		return (
 			<div className="InfoLayer">
@@ -72,11 +96,11 @@ class Titelblob extends Component {
 					/>
                 )}
                 
-                <div class="WelcomeLayer">
+                <div className="WelcomeLayer">
 
 				{/* CUSTOM TEXT */}
 				{this.state.animation === 'text' && (
-                                    <div class="TextLayer">
+                                    <div className="TextLayer">
                                     <h1>{this.state.content.head}</h1>
                                     <h6>{this.state.content.sub}</h6>
                                 </div>
@@ -102,20 +126,43 @@ class Titelblob extends Component {
 				)}
 				{/* TEAM  */}
 				{this.state.animation === 'teams' && (
-                                    <div class="TextLayer">
+                                    <div className="TextLayer">
                                     <h1>{this.state.team_layer.name}</h1>
                                     <h6>{this.state.team_layer.persons.join(', ')}</h6>
                                 </div>  
 
-					)}
-					{/* COUNTDOWN */}
-					{this.state.animation === 'countdown' && (
-						<div class="TextLayer">
-							<h1>{this.state.team_layer.name}</h1>
-							<h6>{this.state.team_layer.persons.join(', ')}</h6>
-						</div>
+				)}
+				{/* COUNTDOWN */}
+				{this.state.animation === 'countdown' && (
+					<div class="TextLayer">
+						<h1>{this.state.team_layer.name}</h1>
+						<h6>{this.state.team_layer.persons.join(', ')}</h6>
+					</div>
 
-					)}
+				)}
+				{/* TIMETABLE */}
+					{this.state.animation === 'timetable' && (
+						<div className="calendar">
+							<Calendar
+								localizer={localizer}
+								events={events}
+								step={60}
+								timeslots={1}
+								defaultView={'day'}
+								views={['day']}
+								toolbar={false}
+								min={new Date(2019, 7, 6, 8)}
+								max={new Date(2019, 7, 6, 21)}
+								scrollToTime={moment().toDate()}
+								culture={'de-DE'}
+								getNow={() => moment().add(1, 'h').toDate()}
+							/>
+						</div>
+							
+				)}
+					
+
+
                     <svg id="blob" 
                         viewBox="394 220 1675 1638"
                         fill="none"
