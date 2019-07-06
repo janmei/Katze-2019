@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FadeOutBuildings();
+        // FadeOutBuildings();
     }
 
     // Update is called once per frame
