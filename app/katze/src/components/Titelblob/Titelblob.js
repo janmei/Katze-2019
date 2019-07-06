@@ -53,9 +53,9 @@ class Titelblob extends Component {
 	render() {
 		return (
 			<div className="InfoLayer">
-				{this.state.content.countdown_active && (
+				{this.state.countdown_active && (
 					<Countdown
-						date={this.state.content.countdown}
+						date={this.state.countdown}
 						onTick={this.checkTime}
 						renderer={renderer}
 					/>
@@ -66,18 +66,26 @@ class Titelblob extends Component {
 				{/* CUSTOM TEXT */}
 				{this.state.animation === 'text' && (
                                     <div class="TextLayer">
-                                    <h1>{this.state.content.head}15:00</h1>
-                                    <h6>{this.state.content.sub}Pause</h6>
+                                    <h1>{this.state.content.head}</h1>
+                                    <h6>{this.state.content.sub}</h6>
                                 </div>
 				)}
 				{/* TEAM  */}
 				{this.state.animation === 'teams' && (
                                     <div class="TextLayer">
-                                    <h1>{this.state.team_layer.name}15:00</h1>
-                                    <h6>{this.state.team_layer.persons.join(', ')}Pause</h6>
+                                    <h1>{this.state.team_layer.name}</h1>
+                                    <h6>{this.state.team_layer.persons.join(', ')}</h6>
                                 </div>  
 
-				)}
+					)}
+					{/* COUNTDOWN */}
+					{this.state.animation === 'countdown' && (
+						<div class="TextLayer">
+							<h1>{this.state.team_layer.name}</h1>
+							<h6>{this.state.team_layer.persons.join(', ')}</h6>
+						</div>
+
+					)}
                     <svg id="blob" 
                         viewBox="394 220 1675 1638"
                         fill="none"

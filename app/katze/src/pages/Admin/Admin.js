@@ -127,28 +127,38 @@ class Admin extends Component {
     } else if (name == 'selectedTeam' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
-      content: {
-        head: event.target.value.name,
-        sub: event.target.value.persons.join(', ')
-      }
     });
   }
   };
 
 
   handleSubmit = e => {
+    var team ={}
+    if (this.state.template == 'teams') {
+       team = {
+        content: {
+          head: this.state.content.head,
+          sub: this.state.content.sub,
+        },
+        countdown: this.state.countdown,
+        countdown_active: this.state.countdown_active,
+        team_layer: this.state.selectedTeam.id,
+        animation: this.state.template
+      }
+    } else {
+       team = {
+        content: {
+          head: this.state.content.head,
+          sub: this.state.content.sub,
+        },
+        countdown: this.state.countdown,
+        countdown_active: this.state.countdown_active,
+        // team_layer: this.state.selectedTeam.id,
+        animation: this.state.template
+      }
+    }
 
-    var team = qs.stringify({
-      content: {
-        head: this.state.content.head,
-        sub: this.state.content.sub,
-      },
-      countdown: this.state.countdown,
-      countdown_active: this.state.countdown_active,
-      // team_layer: this.state.selectedTeam.id,
-      animation: this.state.template
-    }, { allowDots: true })
-
+    var query = qs.stringify(team, { allowDots: true })
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -156,7 +166,7 @@ class Admin extends Component {
     }
 
     for (var view of this.state.selectedViews) {
-      axios.post('http://localhost:9000/views/' + view, team, config)
+      axios.post('http://localhost:9000/views/' + view, query, config)
         .then(res => {
           this.updateViews();
 
@@ -332,7 +342,7 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active) ? (
+                { this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null) ? (
                   <Button color="primary" variant="contained" type="submit">
                     Senden
                   </Button>

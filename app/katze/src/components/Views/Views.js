@@ -61,12 +61,9 @@ class Views extends Component {
 			return this.props.views.map((item, i) => {
 				return (
 					<View
-						title={item.content.head}
-						sub={item.content.sub}
-						name={item.name}
-						id={item.id}
+						item={item}
 						onChange={this.handleSelectedViews}
-						animation={item.animation}
+						key={item.id}
 					/>
 				);
 			});

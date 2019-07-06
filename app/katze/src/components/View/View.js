@@ -14,21 +14,29 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Axios from 'axios';
+import Countdown from 'react-countdown-now';
 
+const renderer = ({ hours, minutes, seconds, completed }) => {
+	return (
+		<span>
+			{minutes}:{seconds}
+		</span>
+	);
+};
 class View extends Component {
 	constructor() {
 		super();
 
 		this.state = {
 			checked: false,
-			anchorEl: null
+			anchorEl: null,
 		};
 	}
 
 	handleChange = name => event => {
 		this.setState({ ...this.state, [name]: event.target.checked }, function() {
 			if (typeof this.props.onChange === 'function') {
-				this.props.onChange({ id: this.props.id, checked: this.state.checked });
+				this.props.onChange({ id: this.props.item.id, checked: this.state.checked });
 			}
 		});
 	};
@@ -46,7 +54,7 @@ class View extends Component {
 	};
 
 	handleDeleteScene = () => {
-		Axios.delete('http://localhost:9000/views/' + this.props.id).then(res => {
+		Axios.delete('http://localhost:9000/views/' + this.props.item.id).then(res => {
 			console.log(res);
 			this.props.viewDeleted();
 		});
@@ -55,37 +63,40 @@ class View extends Component {
 	render() {
 		return (
 			<Card className="card" m={2} width={1 / 4}>
+					{this.props.item.animation === 'text' && (
 				<CardContent>
-					{/* <Box>
-						<Fragment>
-							<IconButton
-								aria-controls="simple-menu"
-								aria-haspopup="true"
-								onClick={this.handleClick}
-							>
-								<MoreVertIcon />
-							</IconButton>
-							<Menu
-								id="simple-menu"
-								anchorEl={this.state.anchorEl}
-								keepMounted
-								open={Boolean(this.state.anchorEl)}
-								onClose={this.handleClose}
-							>
-								<MenuItem onClick={this.handleDeleteScene}>
-									Szene löschen
-								</MenuItem>
-							</Menu>
-						</Fragment>
-					</Box> */}
-					<Typography color="textSecondary">{this.props.name}</Typography>
+					<Typography color="textSecondary">{this.props.item.name}</Typography>
 					<Typography variant="h6" component="p">
-						{this.props.title}
+						{this.props.item.content.head}
 					</Typography>
 					<Typography variant="subtitle1" component="p">
-						{this.props.sub}
-					</Typography>
+						{this.props.item.content.sub}
+						</Typography>
 				</CardContent>
+				)}
+				{this.props.item.animation === 'teams' && (
+					<CardContent>
+						<Typography color="textSecondary">{this.props.item.name}</Typography>
+						<Typography variant="h6" component="p">
+							{this.props.item.team_layer.name}
+						</Typography>
+						<Typography variant="subtitle1" component="p">
+							{this.props.item.team_layer.persons.join(', ')}
+						</Typography>
+					</CardContent>
+				)}
+				{this.props.item.animation === 'countdown' && (
+					<CardContent>
+						<Typography color="textSecondary">{this.props.item.name}</Typography>
+						<Typography variant="h6" component="p">
+							Countdown
+						</Typography>
+							<Countdown 					
+								date={this.props.item.countdown}
+								renderer={renderer}
+							/>
+					</CardContent>
+				)}
 				<CardActions>
 					<Box className="bottom">
 						<Checkbox
@@ -95,7 +106,7 @@ class View extends Component {
 							color="primary"
 						/>
 						<Typography variant="subtitle1" component="p" align="right">
-							{this.props.animation}
+							{this.props.item.animation}
 						</Typography>
 					</Box>
 				</CardActions>
