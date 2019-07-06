@@ -1,76 +1,75 @@
-
-@import "../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css";
+@import '../../../node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 
 body {
-    /* background: #000000; */
+  /* background: #000000; */
 }
 
 h1 {
-	color: #121212;
-	font-size: 6vmin;
-	line-height: 0.2;
-	font-weight: bold;
-	letter-spacing: 2px;
-	font-family: 'Righteous', sans-serif;
-	text-transform: uppercase;
-	padding-left: 40px;
+  color: #121212;
+  font-size: 6vmin;
+  line-height: 0.2;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: 'Righteous', sans-serif;
+  text-transform: uppercase;
+  padding-left: 40px;
 }
 
 h6 {
-	color: #121212;
-	font-size: 2.5vmin;
-	line-height: 0.2;
-	font-weight: bold;
-	letter-spacing: 2px;
-	font-family: 'Righteous', sans-serif;
-	text-transform: uppercase;
-	padding-left: 40px;
+  color: #121212;
+  font-size: 2.5vmin;
+  line-height: 0.2;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-family: 'Righteous', sans-serif;
+  text-transform: uppercase;
+  padding-left: 40px;
 }
 
 .InfoLayer {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    /* background: #333333; */
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* background: #333333; */
 }
 
 .WelcomeLayer {
-    width: 100%;
-    height: 100%;
-    /* background: #902222; */
-    position: relative;
+  width: 100%;
+  height: 100%;
+  /* background: #902222; */
+  position: relative;
 }
 
 .TextLayer {
-    position: absolute;
-    bottom: 15%;
-    left: 4%;
-    z-index: 100;
+  position: absolute;
+  bottom: 15%;
+  left: 4%;
+  z-index: 100;
 }
 
-.calendar{
-    width: 400px;
-    position: absolute;
-    bottom: 5%;
-    left: 4%;
-    z-index: 999;
-    overflow: hidden;
-    height: 550px;
-    font-family: 'Righteous', sans-serif
+.calendar {
+  width: 400px;
+  position: absolute;
+  bottom: 5%;
+  left: 4%;
+  z-index: 999;
+  overflow: hidden;
+  height: 550px;
+  font-family: 'Righteous', sans-serif;
 }
 
 svg#blob {
-    position: absolute;
-    top: 0;
-    /*width: 150vmax;
+  position: absolute;
+  top: 0;
+  /*width: 150vmax;
     height: 150vmin;*/
-    z-index: 10;
+  z-index: 10;
 }
 
 svg#blob g {
-    transform: translate(0px,0px);
+  transform: translate(0px, 0px);
 }
 
 /* ///////////////
@@ -78,52 +77,138 @@ SPONSORS
 ///////////////// */
 
 .SponsorsLayer {
-    position: absolute;
-    bottom: 6%;
-    left: 6%;
-    z-index: 100;
+  position: absolute;
+  bottom: 6%;
+  left: 6%;
+  z-index: 100;
 }
 
 #sponsors {
-    width: 320px;
-    height: 190px;
-    position: relative;
+  width: 320px;
+  height: 190px;
+  position: relative;
 }
 
 #sponsors div {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: #FFFFFF;
-    position: absolute;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index: 11;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 11;
 }
 
 #sponsors div img {
-    max-width: 100%;
-    max-height: 100%;   
+  max-width: 100%;
+  max-height: 100%;
 }
 
 #sponsors div:nth-of-type(1) {
-    animation-name: fader;
-    animation-delay: 4s;
-    animation-duration: 1.6s;
-    z-index: 30;
+  animation-name: fader;
+  animation-delay: 4s;
+  animation-duration: 1.6s;
+  z-index: 30;
 }
 
 #sponsors div:nth-of-type(2) {
-    z-index: 20;
+  z-index: 20;
 }
 
-#sponsors div:nth-of-type(n+3) {
-    display: none;
+#sponsors div:nth-of-type(n + 3) {
+  display: none;
 }
 
 @keyframes fader {
-    from { opacity: 1.0; }
-    to   { opacity: 0.0; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ///////////////
+Kalender
+///////////////// */
+.rbc-today {
+  background-color: #fff;
+}
+
+.rbc-time-view {
+  border: none;
+}
+
+.rbc-time-content > * + * > * {
+  border-left: none;
+}
+
+.rbc-time-header-content {
+  border-left: none;
+}
+
+.rbc-event {
+  background-color: #452f92;
+  border: none;
+  border-radius: 15px;
+}
+
+.calendar {
+  width: 540px;
+  position: absolute;
+  bottom: 14%;
+  left: 4%;
+  z-index: 999;
+  overflow: hidden;
+  height: 1100px;
+  font-family: 'Righteous', sans-serif;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.rbc-event-content {
+  font-size: 197%;
+  margin-top: 8px;
+}
+
+.rbc-event-label {
+  font-size: 130%;
+}
+
+.rbc-label {
+  padding: 0 5px;
+  opacity: 0.4;
+}
+
+.rbc-day-slot .rbc-event {
+  border: 1px solid #265985;
+  display: flex;
+  max-height: 100%;
+  min-height: 20px;
+  flex-flow: column wrap;
+  align-items: flex-start;
+  overflow: hidden;
+  position: absolute;
+  padding: 20px;
+}
+
+.rbc-current-time-indicator {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: #94ffd3;
+  pointer-events: none;
+  border-radius: 140px;
+}
+
+.rbc-day-slot .rbc-event {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  flex-wrap: nowrap;
 }
