@@ -18,6 +18,12 @@ export const updateData = data => {
 	socket.emit('update_data', data);
 };
 
+export const getTrigger = cb => {
+	socket.on('trigger transition', (data) => {
+		return cb(null, data)
+	})
+}
+
 export const triggerTransition = data => {
 	socket.emit('trigger transition')
 }

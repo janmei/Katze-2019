@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './UnityScene.css';
 import Unity, { UnityContent } from 'react-unity-webgl';
 import moment from 'moment';
+import { getTrigger } from '../../global/socket';
 
 // https://github.com/elraccoone/react-unity-webgl/wiki/Unity-Content
 // SEND MESSAGES
@@ -20,7 +21,8 @@ class UnityScene extends Component {
       countdown_active: false,
       animation: '',
       team_layer: {},
-      loaded: false
+      loaded: false,
+      isMain: false
     };
 
     this.unityContent = new UnityContent(
@@ -35,6 +37,17 @@ class UnityScene extends Component {
       // Now we can for example hide the loading overlay.
 
       this.updateTexts(this.state)
+      if (this.state.isMain && moment().isAfter(this.state.countdown)) { 
+        getTrigger((err, data) => {
+          console.log("trigger");
+          
+          this.unityContent.send(
+            '',
+            '',
+            ''
+          )
+        })
+      }
     });
   }
 
@@ -96,7 +109,8 @@ class UnityScene extends Component {
       countdown: next.data.countdown,
       countdown_active: next.data.countdown_active,
       animation: next.data.animation,
-      team_layer: next.data.team_layer
+      team_layer: next.data.team_layer,
+      isMain: next.data.isMain,
     });
 
     

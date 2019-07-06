@@ -26,6 +26,7 @@ import Countdown from '../../components/Countdown/Countdown';
 import { Button, Box } from '@material-ui/core';
 import { updateData } from '../../global/socket';
 import { triggerTransition } from '../../global/socket';
+import moment from 'moment';
 
 
 class Admin extends Component {
@@ -368,13 +369,15 @@ class Admin extends Component {
                 )} 
               </Box>
 
-              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain) && (
+              <Box m={2}>
+              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().isAfter(moment(this.state.selectedViews[0].countdown))) && (
                 <div className="bottom">
-                <Button color="primary" variant="contained" onClick={this.triggerTransition}>
-                  Senden
-                  </Button>
+                  <Button color="primary" variant="contained" onClick={this.triggerTransition}>
+                    Übergang      
+                </Button>
               </div>
               ) }
+              </Box>
             </div>
           </Drawer>
         </form>
