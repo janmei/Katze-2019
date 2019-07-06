@@ -127,6 +127,10 @@ class Admin extends Component {
     } else if (name == 'selectedTeam' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
+      content: {
+        head: event.target.value.name,
+        sub: event.target.value.persons.join(', ')
+      }
     });
   }
   };
@@ -141,7 +145,7 @@ class Admin extends Component {
       },
       countdown: this.state.countdown,
       countdown_active: this.state.countdown_active,
-      team_layer: this.state.selectedTeam.id,
+      // team_layer: this.state.selectedTeam.id,
       animation: this.state.template
     }, { allowDots: true })
 

@@ -31,9 +31,9 @@ class Titelblob extends Component {
 			content: {
 				head: next.data.content.head,
 				sub: next.data.content.sub,
-				countdown: next.data.content.countdown,
-				countdown_active: next.data.content.countdown_active
 			},
+			countdown: next.data.content.countdown,
+			countdown_active: next.data.content.countdown_active,
 			animation: next.data.animation,
 			team_layer: next.data.team_layer
 		});
