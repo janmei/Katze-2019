@@ -8,18 +8,28 @@ public class Communicator : MonoBehaviour
     public TMPro.TextMeshProUGUI headline;
     public TMPro.TextMeshProUGUI subline;
     public TMPro.TextMeshProUGUI state;
+    public Animator TextAnimator;
 
+    string hl;
+    string sl;
+    string top;
+    int countdown;
+
+    public CountdownController CC;
 
     // Start is called before the first frame update
     void Start()
     {
-        ChangeText("zuversicht|irgendeinesubline und so|2000");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    ChangeText("Symbiosis|Verrückte Waldmenschen|15000|nope");
+        //}
     }
 
     public string ChangeText(string input)
@@ -28,11 +38,38 @@ public class Communicator : MonoBehaviour
         string[] parameters = Split(input);
         Debug.Log("Headline: " + parameters[0] + " - Subline: " + parameters[1] + " Countdown: " + parameters[2]);
 
+        // Start Animation
+        TextAnimator.SetBool("fadeOut", true);
+
         // Change text
-        headline.text = parameters[0];
-        subline.text = parameters[1];        
+        hl = parameters[0];
+        sl = parameters[1];
+        string cd = parameters[2].ToString();
+        countdown = System.Convert.ToInt32(cd);
+        top = parameters[3];
+
+        // Change Countdown
+        if(countdown >= 1)
+        {
+            CC.SetCountdown(countdown);
+        }
+
+        Invoke("H_ChangeText", 1.5f);
 
         return "Funktioniert!";
+    }
+
+    public void H_ChangeText()
+    {
+        headline.text = hl;
+        subline.text = sl;
+        if(top == "teams")
+        {
+            state.text = "NEXT UP:";
+        } else
+        {
+            state.text = " ";
+        }
     }
 
     public string[] Split(string toSplit)
