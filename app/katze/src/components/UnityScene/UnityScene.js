@@ -16,7 +16,7 @@ class UnityScene extends Component {
         head: '',
         sub: ''
       },
-      countdown: '2019-07-06T19:34:16.578Z',
+      countdown: '',
       countdown_active: false,
       animation: '',
       team_layer: {},
@@ -34,67 +34,72 @@ class UnityScene extends Component {
     this.unityContent.on("loaded", () => {
       // Now we can for example hide the loading overlay.
 
-      this.updateTexts()
+      this.updateTexts(this.state)
     });
   }
 
-  updateTexts () {
-    if (this.state.animation === 'text') {
-      if (this.state.countdown_active) {
+  updateTexts = (data)=>  {
+    if (data.animation === 'text') {
+      if (!data.countdown_active) {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          this.state.content.head + '|' + this.state.content.sub + '|' + 'false'
+          data.content.head + '|' + data.content.sub + '|' + '-1|' + data.animation 
         )
       } else {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          this.state.content.head + '|' + this.state.content.sub + '|' + this.getDiff(this.state.countdown)
+          data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|'+data.animation
         )
+        console.log(data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|' + data.animation)
+        
       }
     }
-    else if (this.state.animation === 'teams') {
-      if (this.state.countdown_active) {
+    else if (data.animation === 'teams') {
+      if (!data.countdown_active) {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          this.state.team_layer.name + '|' + this.state.team_layer.persons.join(' • ') + '|' + 'false'
+          data.team_layer.name + '|' + data.team_layer.persons.join(' • ') + '|' + '-1|'+data.animation
         )
       } else {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          this.state.team_layer.name + '|' + this.state.team_layer.persons.join(' • ') + '|' + this.getDiff(this.state.countdown)
+          data.team_layer.name + '|' + data.team_layer.persons.join(' • ') + '|' + this.getDiff(data.countdown)+'|'+data.animation
         )
       }
-    }else if (this.state.animation === 'sponsors' || this.state.animation === 'timetable') {
+    }else if (data.animation === 'sponsors' || data.animation === 'timetable') {
       this.unityContent.send(
         'Communicator',
         'ChangeText',
-        "||false"
+        "||-1|"+data.animation
       )
     }
   }
 
   componentDidUpdate() {
     // this.getDiff(this.state.countdown)
-    
+    this.updateTexts(this.state)
+    console.log(this.state);
   }
-  componentWillReceiveProps(next) {
+
+  componentWillReceiveProps = (next) => {
+    console.log(next);
     
     this.setState({
       content: {
         head: next.data.content.head,
         sub: next.data.content.sub,
       },
-      countdown: next.data.content.countdown,
-      countdown_active: next.data.content.countdown_active,
+      countdown: next.data.countdown,
+      countdown_active: next.data.countdown_active,
       animation: next.data.animation,
       team_layer: next.data.team_layer
     });
-    this.updateTexts()
 
+    
   }
 
   getDiff(time) {

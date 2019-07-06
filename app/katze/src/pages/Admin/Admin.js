@@ -255,7 +255,6 @@ class Admin extends Component {
                     </MenuItem>
                     <MenuItem value={'teams'}>Teams</MenuItem>
                     <MenuItem value={'text'}>Text</MenuItem>
-                    <MenuItem value={'schedule'}>Zeitplan</MenuItem>
                     <MenuItem value={'countdown'}>Countdown</MenuItem>
                     <MenuItem value={'timetable'}>Zeitplan</MenuItem>
                     <MenuItem value={'sponsors'}>Sponsoren</MenuItem>
