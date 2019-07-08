@@ -45,7 +45,7 @@ io.on('connection', socket => {
 	socket.on('trigger transition', data => {
 		console.log("triggered");
 		
-		socket.broadcast.emit('trigger transition')
+		socket.broadcast.emit('trigger transition', data)
 	})
 
 	// disconnect is fired when a client leaves the server

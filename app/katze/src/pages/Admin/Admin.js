@@ -51,6 +51,7 @@ class Admin extends Component {
       },
       countdown: Date,
       countdown_active: false,
+      transitionState: ''
     };
 
     this.handleArrayChange = this.handleArrayChange.bind(this)
@@ -242,8 +243,19 @@ class Admin extends Component {
     }
   }
 
-  triggerTransition = (e) => {
-    triggerTransition()
+  triggerTransitionStart = (e) => {
+    this.setState({
+      transitionState: 'start'
+    })
+    triggerTransition("start")
+    e.preventDefault()
+  }
+
+  triggerTransitionEnd = (e) => {
+    this.setState({
+      transitionState: 'end'
+    })
+    triggerTransition("end")
     e.preventDefault()
   }
 
@@ -419,7 +431,7 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                {this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null || this.state.template === 'timetable' || this.state.template === 'sponsors' || this.state.template === 'program') ? (
+                {this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || (this.state.countdown_active && this.state.template !== '') || this.state.selectedTeam != null || this.state.template === 'timetable' || this.state.template === 'sponsors' || this.state.template === 'program') ? (
                   <Button color="primary" variant="contained" type="submit">
                     Senden
                   </Button>
@@ -431,12 +443,27 @@ class Admin extends Component {
               </Box>
 
               <Box m={2}>
-              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().subtract(1, 'h').isAfter(moment(this.state.selectedViews[0].countdown))) && (
-                <div className="bottom">
-                  <Button color="primary" variant="contained" onClick={this.triggerTransition}>
-                    Übergang      
-                </Button>
-              </div>
+              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().isAfter(moment(this.state.selectedViews[0].countdown))) && (
+                  <div className="bottom">
+                    {this.state.transitionState !== 'start' ? (
+                      <Button color="primary" variant="contained" onClick={this.triggerTransitionStart}>
+                        Start Transition
+                      </Button>
+                    ) : (
+                        <Button color="primary" variant="contained" onClick={this.triggerTransitionStart} disabled>
+                          Start Transition
+                      </Button>
+                    )}
+                    {this.state.transitionState === 'start' ? (
+                      <Button color="primary" variant="contained" onClick={this.triggerTransitionEnd}>
+                        End Transition
+                      </Button>
+                    ) : (
+                        <Button color="primary" variant="contained" onClick={this.triggerTransitionStart} disabled>
+                          End Transition
+                      </Button> 
+                    )}
+                  </div>
               ) }
               </Box>
             </div>

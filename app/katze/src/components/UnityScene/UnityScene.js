@@ -37,17 +37,23 @@ class UnityScene extends Component {
       // Now we can for example hide the loading overlay.
 
       this.updateTexts(this.state)
-      if (this.state.isMain && moment().isAfter(this.state.countdown)) { 
+      if (this.state.isMain && moment().isAfter(this.state.countdown)) {
         getTrigger((err, data) => {
-          console.log("trigger");
-          
-          this.unityContent.send(
-            '',
-            '',
-            ''
-          )
-        })
+
+          if (data === 'start') {
+            this.unityContent.send(
+              'Communicator',
+              'StartTransitionToSlides'
+            )
+          } else if (data === 'end') {
+            this.unityContent.send(
+              'Communicator',
+              'StartTransitionToSlides'
+            )
+          }
+          })
       }
+
     });
   }
 
@@ -71,13 +77,13 @@ class UnityScene extends Component {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          data.content.head + '|' + data.content.sub + '|' + '-1|text'
+          data.content.head + '|' + data.content.sub + '|' + '-1|teams'
         )
       } else {
         this.unityContent.send(
           'Communicator',
           'ChangeText',
-          data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|text'
+          data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|teams'
         )
       }
     }
@@ -130,7 +136,7 @@ class UnityScene extends Component {
 
   getDiff(time) {
     const current = moment()
-    const target = moment(time).add(2, 'h')
+    const target = moment(time)
     return target.diff(current)
   }
 

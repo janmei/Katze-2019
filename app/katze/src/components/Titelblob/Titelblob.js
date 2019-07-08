@@ -124,7 +124,7 @@ class Titelblob extends Component {
                 localizer={localizer}
                 events={events}
                 step={60}
-                // timeslots={2}
+                timeslots={2}
                 defaultView={'day'}
                 views={['day']}
                 toolbar={false}

@@ -25,5 +25,5 @@ export const getTrigger = cb => {
 }
 
 export const triggerTransition = data => {
-	socket.emit('trigger transition')
+	socket.emit('trigger transition', data)
 }
