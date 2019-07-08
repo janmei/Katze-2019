@@ -4,6 +4,7 @@ const programSchema = new Schema({
   title: {
     type: String
   },
+  person: String,
   time: {
     type: String
   }
@@ -21,6 +22,7 @@ programSchema.methods = {
       // simple view
       id: this.id,
       title: this.title,
+      person: this.person,
       time: this.time,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt

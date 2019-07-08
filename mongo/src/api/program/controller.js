@@ -8,13 +8,8 @@ export const create = ({ bodymen: { body } }, res, next) =>
     .catch(next)
 
 export const index = ({ querymen: { query, select, cursor } }, res, next) =>
-  Program.count(query)
-    .then(count => Program.find(query, select, cursor)
-      .then((programs) => ({
-        count,
-        rows: programs.map((program) => program.view())
-      }))
-    )
+  Program.find(query, select, cursor)
+    .then((programs)=>programs.map((program) => program.view()))
     .then(success(res))
     .catch(next)
 

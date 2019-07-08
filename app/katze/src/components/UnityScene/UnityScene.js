@@ -65,8 +65,20 @@ class UnityScene extends Component {
           'ChangeText',
           data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|'+data.animation
         )
-        console.log(data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|' + data.animation)
-        
+      }
+    } else if (data.animation === 'program') {
+      if (!data.countdown_active) {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          data.content.head + '|' + data.content.sub + '|' + '-1|text'
+        )
+      } else {
+        this.unityContent.send(
+          'Communicator',
+          'ChangeText',
+          data.content.head + '|' + data.content.sub + '|' + this.getDiff(data.countdown) + '|text'
+        )
       }
     }
     else if (data.animation === 'teams') {

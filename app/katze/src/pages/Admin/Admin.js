@@ -43,6 +43,8 @@ class Admin extends Component {
       selectedTeam: null,
       views: [],
       selectedViews: [],
+      program: [],
+      selectedProgram: null,
       content: {
         head: "",
         sub: ""
@@ -75,6 +77,17 @@ class Admin extends Component {
       .then(res => {
         this.setState({
           views: res.data,
+        });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+    
+    axios
+      .get('http://localhost:9000/programs/')
+      .then(res => {
+        this.setState({
+          program: res.data,
         });
       })
       .catch(function (err) {
@@ -129,16 +142,25 @@ class Admin extends Component {
   };
 
   handleSelectChange = name => event => {
-    if (name == 'selectedSemester' && event.target.value != 'none'){
+    if (name === 'selectedSemester' && event.target.value != 'none'){
     this.setState({
       [name]: event.target.value,
       teams: event.target.value.teams,
     });
-    } else if (name == 'selectedTeam' && event.target.value != 'none'){
+    } else if ((name === 'selectedTeam') && event.target.value !== 'none'){
     this.setState({
       [name]: event.target.value,
     });
-  }
+    }
+    else if (name === 'selectedProgram' && event.target.value !== 'none') {
+      this.setState({
+        content: {
+          head: event.target.value.person,
+          sub: event.target.value.title
+        },
+        [name]: event.target.value
+      })
+    }
   };
 
 
@@ -194,6 +216,16 @@ class Admin extends Component {
     if (this.state.semesters != null) {
       return this.state.semesters.map((item, i) => {
         return <MenuItem value={item}>{item.year}</MenuItem>;
+      });
+    } else {
+      return;
+    }
+  }
+
+  renderProgram() {
+    if (this.state.program != null) {
+      return this.state.program.map((item, i) => {
+        return <MenuItem value={item}>{item.person}</MenuItem>;
       });
     } else {
       return;
@@ -260,8 +292,9 @@ class Admin extends Component {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={'teams'}>Teams</MenuItem>
                     <MenuItem value={'text'}>Text</MenuItem>
+                    <MenuItem value={'teams'}>Teams</MenuItem>
+                    <MenuItem value={'program'}>Programm</MenuItem>
                     <MenuItem value={'countdown'}>Countdown</MenuItem>
                     <MenuItem value={'timetable'}>Zeitplan</MenuItem>
                     <MenuItem value={'sponsors'}>Sponsoren</MenuItem>
@@ -306,6 +339,34 @@ class Admin extends Component {
                           <em>None</em>
                         </MenuItem>
                         {this.renderTeams()}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                </div>
+              )}
+
+              {this.state.template === 'program' && (
+                <div>
+                  <Divider />
+                  <Typography component="h2" variant="h5" gutterBottom>
+                    Info Layer
+                </Typography>
+                  <Box m={2}>
+                    <FormControl className="menuForm" variant="outlined" fullWidth margin="normal">
+                      <InputLabel htmlFor="outlined-age-simple">
+                        Programm
+                      </InputLabel>
+                      <Select
+                        value={this.state.selectedProgram || 'none'}
+                        onChange={this.handleSelectChange('selectedProgram')}
+                        input={
+                          <OutlinedInput name="program" labelWidth={65} id="outlined-age-simple" />
+                        }
+                      >
+                        <MenuItem value="none">
+                          <em>None</em>
+                        </MenuItem>
+                        {this.renderProgram()}
                       </Select>
                     </FormControl>
                   </Box>
@@ -358,7 +419,7 @@ class Admin extends Component {
                 <Countdown getTargetTime={this.handleArrayChange('countdown')} />
               )}
               <Box m={2}>
-                {this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null || this.state.template === 'timetable' || this.state.template === 'sponsors') ? (
+                {this.state.selectedViews.length > 0 && (this.state.content.head != '' || this.state.content.sub != '' || this.state.countdown_active || this.state.selectedTeam != null || this.state.template === 'timetable' || this.state.template === 'sponsors' || this.state.template === 'program') ? (
                   <Button color="primary" variant="contained" type="submit">
                     Senden
                   </Button>
@@ -370,7 +431,7 @@ class Admin extends Component {
               </Box>
 
               <Box m={2}>
-              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().isAfter(moment(this.state.selectedViews[0].countdown))) && (
+              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().subtract(1, 'h').isAfter(moment(this.state.selectedViews[0].countdown))) && (
                 <div className="bottom">
                   <Button color="primary" variant="contained" onClick={this.triggerTransition}>
                     Übergang      

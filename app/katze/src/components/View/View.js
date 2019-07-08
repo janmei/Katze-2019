@@ -63,7 +63,7 @@ class View extends Component {
 	render() {
 		return (
 			<Card className="card" m={2} width={1 / 4}>
-					{this.props.item.animation === 'text' && (
+				{(this.props.item.animation === 'text' || this.props.item.animation === 'program') && (
 				<CardContent>
 					<Typography color="textSecondary">{this.props.item.name}</Typography>
 					<Typography variant="h6" component="p">
@@ -107,6 +107,14 @@ class View extends Component {
 							date={this.props.item.countdown}
 							renderer={renderer}
 						/>
+					</CardContent>
+				)}
+				{this.props.item.animation === 'timetable' && (
+					<CardContent>
+						<Typography color="textSecondary">{this.props.item.name}</Typography>
+						{/* <Typography variant="h6" component="p">
+							Zeitplan
+						</Typography> */}
 					</CardContent>
 				)}
 				<CardActions>
