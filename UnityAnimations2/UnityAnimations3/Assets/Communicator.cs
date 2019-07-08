@@ -10,6 +10,8 @@ public class Communicator : MonoBehaviour
     public TMPro.TextMeshProUGUI state;
     public Animator TextAnimator;
 
+    public GameObject overlay;
+
     string hl;
     string sl;
     string top;
@@ -26,10 +28,16 @@ public class Communicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Input for testing
         //if (Input.GetKeyDown(KeyCode.Space))
         //{
-        //    ChangeText("Symbiosis|Verrückte Waldmenschen|15000|nope");
+        //    ChangeText(" | |0|nope");
         //}
+    }
+
+    public void StartTransitionToSlides()
+    {
+        overlay.SetActive(true);
     }
 
     public string ChangeText(string input)
@@ -70,6 +78,7 @@ public class Communicator : MonoBehaviour
         {
             state.text = " ";
         }
+        TextAnimator.SetBool("fadeOut", false);
     }
 
     public string[] Split(string toSplit)
