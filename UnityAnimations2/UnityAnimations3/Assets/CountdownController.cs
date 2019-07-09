@@ -96,4 +96,11 @@ public class CountdownController : MonoBehaviour
         buildings.SetBool("fadeOut", true);
         text.SetBool("stayOut", true);
     }
+
+    public void EndCountdown()
+    {
+        StopAllCoroutines();
+        countdownActive = false;
+        countdown_small.SetActive(false);
+    }
 }

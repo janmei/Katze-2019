@@ -29,15 +29,28 @@ public class Communicator : MonoBehaviour
     void Update()
     {
         // Input for testing
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    ChangeText(" | |0|nope");
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // ChangeText(" | |-1|nope");
+            // StartTransitionToSlides();
+        }
     }
 
     public void StartTransitionToSlides()
     {
-        overlay.SetActive(true);
+        if (!overlay.activeSelf)
+        {
+            overlay.SetActive(true);
+        } else
+        {
+            overlay.GetComponent<Animator>().SetTrigger("BackToSlide");
+            Invoke("disableOverlay", 10);
+        }
+    }
+    
+    void disableOverlay()
+    {
+        overlay.SetActive(false);
     }
 
     public string ChangeText(string input)
@@ -60,6 +73,9 @@ public class Communicator : MonoBehaviour
         if(countdown >= 1)
         {
             CC.SetCountdown(countdown);
+        } else if(countdown == -1)
+        {
+            CC.EndCountdown();
         }
 
         Invoke("H_ChangeText", 1.5f);
