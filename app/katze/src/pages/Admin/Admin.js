@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './Admin.css';
 
 import Drawer from '@material-ui/core/Drawer';
@@ -442,8 +442,9 @@ class Admin extends Component {
                 )} 
               </Box>
 
-              <Box m={2}>
-              {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain && moment().isAfter(moment(this.state.selectedViews[0].countdown))) && (
+              <Box m={2} mt={5}>
+                {(this.state.selectedViews.length === 1 && this.state.selectedViews[0].isMain) && (
+                  <Fragment>
                   <div className="bottom">
                     {this.state.transitionState !== 'start' ? (
                       <Button color="primary" variant="contained" onClick={this.triggerTransitionStart}>
@@ -454,16 +455,18 @@ class Admin extends Component {
                           Start Transition
                       </Button>
                     )}
+
                     {this.state.transitionState === 'start' ? (
                       <Button color="primary" variant="contained" onClick={this.triggerTransitionEnd}>
                         End Transition
                       </Button>
                     ) : (
-                        <Button color="primary" variant="contained" onClick={this.triggerTransitionStart} disabled>
+                        <Button color="primary" variant="contained" onClick={this.triggerTransitionEnd} disabled>
                           End Transition
                       </Button> 
-                    )}
+                      )}
                   </div>
+                  </Fragment>
               ) }
               </Box>
             </div>

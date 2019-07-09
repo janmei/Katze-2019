@@ -37,13 +37,13 @@ class UnityScene extends Component {
       // Now we can for example hide the loading overlay.
 
       this.updateTexts(this.state)
-      if (this.state.isMain && moment().isAfter(this.state.countdown)) {
+      if (this.state.isMain) {
         getTrigger((err, data) => {
 
           if (data === 'start') {
             this.unityContent.send(
               'Communicator',
-              'StartTransitionToSlides'
+              'StartTransitionToSlides',
             )
           } else if (data === 'end') {
             this.unityContent.send(
