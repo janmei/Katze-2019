@@ -103,11 +103,6 @@ class Titelblob extends Component {
                 </div>
                 <div>
                   <img
-                    src={require('../../assets/sponsors/Sparkasse_da.png')}
-                  />
-                </div>
-                <div>
-                  <img
                     src={require('../../assets/sponsors/Voba_Solutions.png')}
                   />
                 </div>
