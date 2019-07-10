@@ -51,7 +51,8 @@ class Admin extends Component {
       },
       countdown: Date,
       countdown_active: false,
-      transitionState: ''
+      transitionState: '',
+      breakPreset: false
     };
 
     this.handleArrayChange = this.handleArrayChange.bind(this)
@@ -140,6 +141,24 @@ class Admin extends Component {
 
   handleSwitchChange = name => event => {
     this.setState({ [name]: event.target.checked });
+
+    if (name === "breakPreset" && event.target.checked) {
+      this.setState({
+        content: {
+          head: "Pause",
+          sub: "Gleich geht es weiter!"
+        },
+        countdown_active: true
+      })
+    } else if (name === "breakPreset" && !event.target.checked) {
+      this.setState({
+        content: {
+          head: "",
+          sub: ""
+        },
+        countdown_active: false
+      })
+    }
   };
 
   handleSelectChange = name => event => {
@@ -307,7 +326,7 @@ class Admin extends Component {
                     <MenuItem value={'text'}>Text</MenuItem>
                     <MenuItem value={'teams'}>Teams</MenuItem>
                     <MenuItem value={'program'}>Programm</MenuItem>
-                    <MenuItem value={'countdown'}>Countdown</MenuItem>
+                    {/* <MenuItem value={'countdown'}>Countdown</MenuItem> */}
                     <MenuItem value={'timetable'}>Zeitplan</MenuItem>
                     <MenuItem value={'sponsors'}>Sponsoren</MenuItem>
                   </Select>
@@ -392,6 +411,17 @@ class Admin extends Component {
                   <Typography component="h2" variant="h5" gutterBottom>
                     Info Layer
                 </Typography>
+                  <Box display="flex" ml={1} alignItems="center">
+                    <Switch
+                      checked={this.state.breakPreset}
+                      onChange={this.handleSwitchChange('breakPreset')}
+                      value="checked"
+                      color="primary"
+                    />
+                    <Typography component="p" variant="body1" gutterBottom>
+                      Pause
+                </Typography>
+                  </Box>
                   <Box m={2}>
 
                   <TextField
