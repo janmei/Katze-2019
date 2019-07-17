@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Communicator : MonoBehaviour
 {
-    [Header("Text")]
+    [Header("Text Elements")]
     public TMPro.TextMeshProUGUI headline;
     public TMPro.TextMeshProUGUI subline;
     public TMPro.TextMeshProUGUI state;
-    public Animator TextAnimator;
 
+
+    public Animator TextAnimator;
     public GameObject overlay;
 
     string hl;
@@ -36,6 +37,7 @@ public class Communicator : MonoBehaviour
         }
     }
 
+    // Called when "Start Transition" Button is pressed
     public void StartTransitionToSlides()
     {
         if (!overlay.activeSelf)
@@ -53,6 +55,9 @@ public class Communicator : MonoBehaviour
         overlay.SetActive(false);
     }
 
+    // Public function to change the text. The input has to be one string with up to four parameters, divided by the character "|".
+    // Example: ChangeText("HeadlineText|SublineText|2000|Teams")
+    // (String Headline, String Subline, String Countdown, String Top)
     public string ChangeText(string input)
     {
         // Split from string into parameters
