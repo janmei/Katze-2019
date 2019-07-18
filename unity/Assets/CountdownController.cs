@@ -18,13 +18,6 @@ public class CountdownController : MonoBehaviour
 
     int secondsUntilOver;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // StartCountdown();
-        // SetCountdown(80000);
-    }
-
     // Update is called once per frame
     void Update()
     {
