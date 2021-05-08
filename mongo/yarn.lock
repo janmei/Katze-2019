@@ -5009,10 +5009,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-querymen@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/querymen/-/querymen-2.1.3.tgz#fd0231c01002e9f9e43e06255ddcde37c1bd9132"
-  integrity sha1-/QIxwBAC6fnkPgYlXdzeN8G9kTI=
+querymen@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/querymen/-/querymen-2.1.4.tgz#c2978c16d63554d99ce9d3c6f75511db4af7f1f7"
+  integrity sha512-sA6F7ME7E4hJ8uP1uIf58MBznU0IIJwNdo9uQPeusLkW3+ZRUIQGxmvZpYQge3pCAG9jUOhIxx4L/jkkuEu57A==
   dependencies:
     lodash "^4.11.1"
     rich-param "^1.0.1"
