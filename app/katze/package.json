@@ -18,7 +18,7 @@
     "react-final-form": "^4.1.0",
     "react-final-form-arrays": "^2.0.3",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "5.0.1",
     "react-unity-webgl": "^7.1.1",
     "request": "^2.88.0",
     "socket.io": "^2.2.0",
